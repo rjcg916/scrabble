@@ -1,4 +1,4 @@
-import {Game} from '../../src/models/game.model';
+import {Game} from './game.model';
 
 let aGame : Game = new Game("my test game", 2);
 

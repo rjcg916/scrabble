@@ -1,8 +1,28 @@
-import {Tile} from '../../src/models/tile.model';
+import {Tile} from './tile.model';
 
-const aTile : Tile = new Tile("A");
-console.log(aTile.display());
-const zTile : Tile = new Tile("Z");
-console.log(zTile.display());
-const blankTile : Tile = new Tile("");
-console.log(blankTile.display());
+describe('Tile', () => {
+  let component: Tile;
+
+  beforeEach(() => {
+
+  })
+
+  describe('create', () => {
+
+    it('should create a tile with letter A', () => {
+
+      component = new Tile("A", 1);
+
+      expect(component.display).toContain("A");
+
+    })
+
+    it('should create a tile with value 1', () => {
+
+      component = new Tile("A", 1);
+
+      expect(component.getValue).toEqual(1);
+
+    })
+  })
+})
