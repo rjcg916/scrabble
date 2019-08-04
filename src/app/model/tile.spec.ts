@@ -9,19 +9,19 @@ describe('Tile', () => {
 
   describe('create', () => {
 
-    it('should create a tile with letter A', () => {
+    it('a tile with letter A', () => {
 
       component = new Tile("A", 1);
 
-      expect(component.display).toContain("A");
+      expect(component.getLetter()).toEqual("A");
 
     })
 
-    it('should create a tile with value 1', () => {
+    it('a tile with value 1', () => {
 
       component = new Tile("A", 1);
 
-      expect(component.getValue).toEqual(1);
+      expect(component.getValue()).toEqual(1);
 
     })
   })

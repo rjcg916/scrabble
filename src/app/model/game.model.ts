@@ -1,9 +1,9 @@
-import { Board } from './board.model';
+import { Board, row, col, orientation } from './board.model';
 import { Player } from './player.model';
 import { Lexicon } from './lexicon.model';
 import { Tile } from './tile.model';
 import { Word } from './word.model';
-import { TileService } from '../service/tile.service';
+import { TileBagService } from '../service/tile-bag.service';
 
 export class Game {
   private board: Board;
@@ -11,14 +11,23 @@ export class Game {
   private lexicon: Lexicon = new Lexicon(Array<Word>());
   private tiles: Tile[] = new Array<Tile>();
   private numberOfPlayers: number;
+  private tileBagService = new TileBagService();
+  private activePlayer : number = 0;
+  private gameDone : boolean = false;
+  constructor(public playerCount: number, public name?: string) {
 
+    this.tiles = this.tileBagService.GetTiles();
 
-  constructor(public name: string, public playerCount: number) {
     this.numberOfPlayers = playerCount;
     this.players = new Array<Player>(playerCount);
+    for (let i: number = 0; i < playerCount; i++) {
+     this.players[i] = new Player();
+    }
+    this.players.forEach( p => this.tiles = p.DrawTiles(this.tiles));
+
     this.board = new Board();
-    this.tiles = TileService.GetTiles();
   }
+
 
   public getName(): string {
     return this.name;
@@ -32,6 +41,24 @@ export class Game {
 
     return 'Tiles (' + this.tiles.length + ')  ' + display;
   }
+
+  public getTileBagCount() {
+    return this.tiles.length;
+  }
+
+
+  public play() {
+
+    while (!this.gameDone) {
+      let tiles = Array<Tile>();
+
+      this.players[this.activePlayer].PlaceTiles(row.r8, col.c8, tiles, orientation.horizontal);
+
+      this.gameDone = true;
+    }
+
+  }
+
 }
 
 

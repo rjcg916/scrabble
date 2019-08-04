@@ -1,26 +1,27 @@
 import { Tile } from "./tile.model";
+import { t } from "@angular/core/src/render3";
 
 export class Rack {
   private rack: Tile[];
-  private static tileCount: number = 7;
+  public static capacity: number = 7;
   constructor() {
     this.rack = new Array<Tile>();
   }
 
-  public Display(): string {
-    let list: string = "";
-    this.rack.forEach((element) => {
-      list =  list.concat(element.display());
-    });
-    return list;
+
+  public Fill( tileSource : Array<Tile>) : Array<Tile> {
+    let tilesNeeded = Rack.capacity - this.rack.length;
+    let tilesAvailable = tileSource.length;
+
+    let drawCount = tilesAvailable > tilesNeeded ? tilesNeeded : tilesAvailable;
+    let tilesToAdd = tileSource.splice(0, drawCount);
+
+    this.rack = this.rack.concat(tilesToAdd);
+
+    return tileSource;
   }
 
-  public AddTile(newTile: Tile): number {
-    if (this.rack.length < Rack.tileCount) {
-      this.rack.push(newTile);
-      return 1;
-    } else {
-      return 0;
-    }
+  public getTileCount() : number {
+    return this.rack.length;
   }
 }
