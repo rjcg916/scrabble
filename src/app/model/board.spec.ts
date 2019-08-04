@@ -3,7 +3,7 @@ import { Tile } from './tile.model';
 
 
 describe('Board', () => {
-  let component: Board;
+  let out: Board;
   let tile : Tile;
 
   beforeEach(() => {
@@ -14,12 +14,12 @@ describe('Board', () => {
 
     it('count should be 1', () => {
 
-      component = new Board();
+      out = new Board();
       tile = new Tile("A", 1);
 
-      component.placeTile(tile, row.r8, col.c8);
+      out.placeTile(tile, row.r8, col.c8);
 
-      expect(component.getTileCount()).toEqual(1);
+      expect(out.getTileCount()).toEqual(1);
 
     })
 

@@ -1,7 +1,7 @@
 import {Tile} from './tile.model';
 
 describe('Tile', () => {
-  let component: Tile;
+  let out: Tile;
 
   beforeEach(() => {
 
@@ -11,17 +11,17 @@ describe('Tile', () => {
 
     it('a tile with letter A', () => {
 
-      component = new Tile("A", 1);
+      out = new Tile("A", 1);
 
-      expect(component.getLetter()).toEqual("A");
+      expect(out.getLetter()).toEqual("A");
 
     })
 
     it('a tile with value 1', () => {
 
-      component = new Tile("A", 1);
+      out = new Tile("A", 1);
 
-      expect(component.getValue()).toEqual(1);
+      expect(out.getValue()).toEqual(1);
 
     })
   })

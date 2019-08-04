@@ -2,7 +2,7 @@ import {Player} from './player.model';
 import {Tile} from './tile.model';
 
 describe('Player', () => {
-  let component: Player;
+  let out: Player;
 
   beforeEach(() => {
 
@@ -10,19 +10,19 @@ describe('Player', () => {
 
   describe('create', () => {
 
-    it('with name fred', () => {
+    it('with name ', () => {
 
-      component = new Player("fred");
+      out = new Player("name");
 
-      expect(component.name).toContain("fred");
+      expect(out.name).toContain("name");
 
     })
 
     it('returns remaining tiles', () => {
 
-      component = new Player();
+      out = new Player();
 
-      let remaining = component.DrawTiles(
+      let remaining = out.DrawTiles(
         [new Tile("A", 1),
         new Tile("B", 1),
         new Tile("A", 1),

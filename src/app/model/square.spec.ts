@@ -3,7 +3,7 @@ import { T } from '@angular/core/src/render3';
 import { Tile } from './tile.model';
 
 describe('Square', () => {
-  let component: Square;
+  let out: Square;
 
   beforeEach(() => {
 
@@ -13,19 +13,19 @@ describe('Square', () => {
 
     it('empty square', () => {
 
-      component = new Square();
+      out = new Square();
 
-      expect(component.IsOccupied()).toEqual(false);
+      expect(out.IsOccupied()).toEqual(false);
 
     })
 
     it('occupied square', () => {
 
-      component = new Square();
+      out = new Square();
 
-      component.place(new Tile("A", 1));
+      out.place(new Tile("A", 1));
 
-      expect(component.IsOccupied()).toEqual(true);
+      expect(out.IsOccupied()).toEqual(true);
 
     })
 
