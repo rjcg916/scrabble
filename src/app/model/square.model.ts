@@ -8,6 +8,7 @@ export enum SquareType {
 export class Square {
   private contains : Tile = null;
   private type: SquareType = SquareType.reg;
+  private isFinal : boolean = false;
   constructor( ) {}
 
   public place( tile : Tile) {

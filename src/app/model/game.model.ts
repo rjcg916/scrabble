@@ -1,4 +1,5 @@
-import { Board, row, col, orientation } from './board.model';
+import { Board,  placement } from './board.model';
+import { coord, row, col} from './coord.model';
 import { Player } from './player.model';
 import { Lexicon } from './lexicon.model';
 import { Tile } from './tile.model';
@@ -33,14 +34,6 @@ export class Game {
     return this.name;
   }
 
-  public displayTiles(): string {
-    let display: string = "";
-    this.tiles.forEach(element => {
-      display = display.concat(element.display());
-    });
-
-    return 'Tiles (' + this.tiles.length + ')  ' + display;
-  }
 
   public getTileBagCount() {
     return this.tiles.length;
@@ -52,7 +45,7 @@ export class Game {
     while (!this.gameDone) {
       let tiles = Array<Tile>();
 
-      this.players[this.activePlayer].PlaceTiles(row.r8, col.c8, tiles, orientation.horizontal);
+      this.players[this.activePlayer].PlaceTiles( new coord(row.r8, col.c8), tiles, placement.horizontal);
 
       this.gameDone = true;
     }
