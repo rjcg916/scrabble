@@ -2,7 +2,7 @@ import { Tile } from './tile.model';
 import { T } from '@angular/core/src/render3';
 
 export enum SquareType {
-  reg, dl, tl, dw, tw
+  reg, dl, tl, dw, tw, start
 };
 
 export class Square {
@@ -21,6 +21,10 @@ export class Square {
 
   public getTile() {
     return this.contains;
+  }
+
+  public setType(type : SquareType) {
+    this.type = type;
   }
 
   public getLetterMultiplier() : number {

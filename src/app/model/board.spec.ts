@@ -18,10 +18,10 @@ describe('Board', () => {
 
       out = new Board();
       tile = new Tile("A", 1);
-      let start = new coord(row.r8, col.c8);
+      let start = new coord(row._8, col._H);
       out.PlaceTiles(start, [tile], placement.horizontal);
 
-      expect(out.getOccupiedCount()).toEqual(1);
+      expect(out.GetOccupiedCount()).toEqual(1);
 
     })
 
@@ -30,9 +30,9 @@ describe('Board', () => {
       out = new Board();
       tile = new Tile("A", 1);
 
-      out.PlaceTiles( new coord( row.r8, col.c8), [tile, tile, tile], placement.horizontal);
+      out.PlaceTiles( new coord( row._8, col._H), [tile, tile, tile], placement.horizontal);
 
-      expect(out.getOccupiedCount()).toEqual(3);
+      expect(out.GetOccupiedCount()).toEqual(3);
 
     })
 
@@ -41,7 +41,7 @@ describe('Board', () => {
       out = new Board();
       tile = new Tile("A", 1);
 
-      let placementType : placement = out.PlacementType([tile, tile, tile], new coord( row.r8, col.c8), new coord (row.r8, col.c10));
+      let placementType : placement = out.GetPlacementType([tile, tile, tile], new coord( row._8, col._H), new coord (row._8, col._J));
 
       expect(placementType).toEqual(placement.horizontal);
 
@@ -52,17 +52,17 @@ describe('Board', () => {
       out = new Board();
       tile = new Tile("A", 1);
 
-      let index =   out.PlaceTiles( new coord( row.r8, col.c7), [tile, tile, tile], placement.horizontal);
-      expect(index).toEqual(col.c9)
+      let index =   out.PlaceTiles( new coord( row._8, col._G), [tile, tile, tile], placement.horizontal);
+      expect(index).toEqual(col._I)
     })
 
     it('vertical placment', () => {
 
       out = new Board();
       tile = new Tile("A", 1);
-      let start = new coord(row.r8, col.c8);
-      let end = new coord(row.r10, col.c8);
-      let placementType : placement = out.PlacementType([tile, tile, tile], start, end);
+      let start = new coord(row._8, col._H);
+      let end = new coord(row._10, col._H);
+      let placementType : placement = out.GetPlacementType([tile, tile, tile], start, end);
 
       expect(placementType).toEqual(placement.vertical);
 
@@ -72,19 +72,19 @@ describe('Board', () => {
 
       out = new Board();
       tile = new Tile("A", 1);
-      let start = new coord(row.r7, col.c8);
+      let start = new coord(row._7, col._G);
       let index =   out.PlaceTiles(start, [tile, tile, tile], placement.vertical);
-      expect(index).toEqual(row.r9)
+      expect(index).toEqual(row._9)
     })
 
     it('placement value of 3', () => {
 
       out = new Board();
       tile = new Tile("A", 1);
-      let start = new coord(row.r7, col.c8);
-      let end = new coord(row.r9, col.c8);
+      let start = new coord(row._7, col._H);
+      let end = new coord(row._9, col._H);
       let index =  out.PlaceTiles(start, [tile, tile, tile], placement.vertical);
-      let value = out.PlacmentValue(start, end);
+      let value = out.GetPlacmentValue(start, end);
       expect(value).toEqual(3);
 
 

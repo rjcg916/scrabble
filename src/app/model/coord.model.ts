@@ -1,10 +1,10 @@
 export enum row {
-  r1, r2, r3, r4, r5, r6, r7, r8,
-  r9, r10, r11, r12, r13, r14, r15
+  _1, _2, _3, _4, _5, _6, _7, _8,
+  _9, _10, _11, _12, _13, _14, _15
 }
 export enum col {
-  c1, c2, c3, c4, c5, c6, c7, c8,
-  c9, c10, c11, c12, c13, c14, c15
+  _A, _B, _C, _D, _E, _F, _G, _H,
+  _I, _J, _K, _L, _M, _N, _O
 }
 
 export class coord {
