@@ -11,106 +11,6 @@ export enum placement {
 export class Board {
   private board: Square[][];
 
-  private tripleWord(t : SquareType) {
-
-    this.board[row._1][col._A].setType(t);
-    this.board[row._1][col._H].setType(t);
-    this.board[row._1][col._O].setType(t);
-
-    this.board[row._8][col._A].setType(t);
-    this.board[row._8][col._O].setType(t);
-
-    this.board[row._15][col._A].setType(t);
-    this.board[row._15][col._H].setType(t);
-    this.board[row._15][col._O].setType(t);
-
-  }
-
-  private doubleWord(t : SquareType) {
-
-    this.board[row._2][col._B].setType(t);
-    this.board[row._2][col._N].setType(t);
-
-    this.board[row._3][col._C].setType(t);
-    this.board[row._3][col._M].setType(t);
-
-    this.board[row._4][col._D].setType(t);
-    this.board[row._4][col._L].setType(t);
-
-    this.board[row._5][col._E].setType(t);
-    this.board[row._5][col._K].setType(t);
-
-    this.board[row._14][col._B].setType(t);
-    this.board[row._14][col._N].setType(t);
-
-    this.board[row._13][col._C].setType(t);
-    this.board[row._13][col._M].setType(t);
-
-    this.board[row._12][col._D].setType(t);
-    this.board[row._12][col._L].setType(t);
-
-    this.board[row._11][col._E].setType(t);
-    this.board[row._11][col._K].setType(t);
-
-  }
-
-  private doubleLetter(t : SquareType){
-
-    this.board[row._1][col._D].setType(t);
-    this.board[row._1][col._L].setType(t);
-
-    this.board[row._3][col._G].setType(t);
-    this.board[row._3][col._I].setType(t);
-
-    this.board[row._4][col._A].setType(t);
-    this.board[row._4][col._H].setType(t);
-    this.board[row._4][col._O].setType(t);
-
-    this.board[row._7][col._C].setType(t);
-    this.board[row._7][col._G].setType(t);
-    this.board[row._7][col._I].setType(t);
-    this.board[row._7][col._M].setType(t);
-
-    this.board[row._8][col._D].setType(t);
-    this.board[row._8][col._L].setType(t);
-
-    this.board[row._9][col._C].setType(t);
-    this.board[row._9][col._G].setType(t);
-    this.board[row._9][col._I].setType(t);
-    this.board[row._9][col._M].setType(t);
-
-    this.board[row._12][col._A].setType(t);
-    this.board[row._12][col._H].setType(t);
-    this.board[row._12][col._O].setType(t);
-
-    this.board[row._13][col._G].setType(t);
-    this.board[row._13][col._I].setType(t);
-
-    this.board[row._15][col._D].setType(t);
-    this.board[row._15][col._L].setType(t);
-
-  }
-
-  private tripleLetter(t : SquareType) {
-
-    this.board[row._2][col._F].setType(t);
-    this.board[row._2][col._J].setType(t);
-
-    this.board[row._6][col._B].setType(t);
-    this.board[row._6][col._F].setType(t);
-    this.board[row._6][col._J].setType(t);
-    this.board[row._6][col._N].setType(t);
-
-    this.board[row._14][col._F].setType(t);
-    this.board[row._14][col._J].setType(t);
-
-    this.board[row._10][col._B].setType(t);
-    this.board[row._10][col._F].setType(t);
-    this.board[row._10][col._J].setType(t);
-    this.board[row._10][col._N].setType(t);
-
-  }
-
   constructor() {
     this.board = [];
 
@@ -121,6 +21,8 @@ export class Board {
         this.board[r][c] = new Square();
       }
     }
+
+    // set square values
 
     // start
     this.board[row._8][col._H].setType(SquareType.start);
@@ -135,7 +37,7 @@ export class Board {
     this.doubleWord(SquareType.dw);
 
     // triple word
-    this.tripleWord(SquareType.tw);
+    this.tripleWord();
 
 
   }
@@ -236,6 +138,116 @@ export class Board {
     }
 
     return count;
+  }
+
+
+   private setSquareValue(locs : Array<coord>, t: SquareType) {
+      locs.forEach(square => {
+          this.board[square.row][square.col].setType(t)
+      });
+   }
+
+   private tripleWord() {
+      this.setSquareValue(
+        [
+          new coord(row._1, col._A),
+          new coord(row._1, col._H),
+          new coord(row._1, col._O),
+
+          new coord(row._8, col._A),
+          new coord(row._8, col._O),
+
+          new coord(row._15, col._A),
+          new coord(row._15, col._H),
+          new coord(row._15, col._O)
+        ]
+        , SquareType.tw
+      )
+   }
+
+  private doubleWord(t : SquareType) {
+
+    this.board[row._2][col._B].setType(t);
+    this.board[row._2][col._N].setType(t);
+
+    this.board[row._3][col._C].setType(t);
+    this.board[row._3][col._M].setType(t);
+
+    this.board[row._4][col._D].setType(t);
+    this.board[row._4][col._L].setType(t);
+
+    this.board[row._5][col._E].setType(t);
+    this.board[row._5][col._K].setType(t);
+
+    this.board[row._14][col._B].setType(t);
+    this.board[row._14][col._N].setType(t);
+
+    this.board[row._13][col._C].setType(t);
+    this.board[row._13][col._M].setType(t);
+
+    this.board[row._12][col._D].setType(t);
+    this.board[row._12][col._L].setType(t);
+
+    this.board[row._11][col._E].setType(t);
+    this.board[row._11][col._K].setType(t);
+
+  }
+
+  private doubleLetter(t : SquareType){
+
+    this.board[row._1][col._D].setType(t);
+    this.board[row._1][col._L].setType(t);
+
+    this.board[row._3][col._G].setType(t);
+    this.board[row._3][col._I].setType(t);
+
+    this.board[row._4][col._A].setType(t);
+    this.board[row._4][col._H].setType(t);
+    this.board[row._4][col._O].setType(t);
+
+    this.board[row._7][col._C].setType(t);
+    this.board[row._7][col._G].setType(t);
+    this.board[row._7][col._I].setType(t);
+    this.board[row._7][col._M].setType(t);
+
+    this.board[row._8][col._D].setType(t);
+    this.board[row._8][col._L].setType(t);
+
+    this.board[row._9][col._C].setType(t);
+    this.board[row._9][col._G].setType(t);
+    this.board[row._9][col._I].setType(t);
+    this.board[row._9][col._M].setType(t);
+
+    this.board[row._12][col._A].setType(t);
+    this.board[row._12][col._H].setType(t);
+    this.board[row._12][col._O].setType(t);
+
+    this.board[row._13][col._G].setType(t);
+    this.board[row._13][col._I].setType(t);
+
+    this.board[row._15][col._D].setType(t);
+    this.board[row._15][col._L].setType(t);
+
+  }
+
+  private tripleLetter(t : SquareType) {
+
+    this.board[row._2][col._F].setType(t);
+    this.board[row._2][col._J].setType(t);
+
+    this.board[row._6][col._B].setType(t);
+    this.board[row._6][col._F].setType(t);
+    this.board[row._6][col._J].setType(t);
+    this.board[row._6][col._N].setType(t);
+
+    this.board[row._14][col._F].setType(t);
+    this.board[row._14][col._J].setType(t);
+
+    this.board[row._10][col._B].setType(t);
+    this.board[row._10][col._F].setType(t);
+    this.board[row._10][col._J].setType(t);
+    this.board[row._10][col._N].setType(t);
+
   }
 
 }
