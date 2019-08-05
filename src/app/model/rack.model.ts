@@ -9,7 +9,7 @@ export class Rack {
   }
 
 
-  public Fill( tileSource : Array<Tile>) : Array<Tile> {
+  public Fill(tileSource: Array<Tile>): Array<Tile> {
     let tilesNeeded = Rack.capacity - this.rack.length;
     let tilesAvailable = tileSource.length;
 
@@ -21,7 +21,7 @@ export class Rack {
     return tileSource;
   }
 
-  public getTileCount() : number {
+  public getTileCount(): number {
     return this.rack.length;
   }
 }

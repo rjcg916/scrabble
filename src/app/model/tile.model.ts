@@ -1,13 +1,13 @@
 
 export class Tile {
 
-  constructor(private letter : string, private value : number) {
+  constructor(private letter: string, private value: number) {
   }
 
-  public getLetter() : string {
+  public getLetter(): string {
     return this.letter;
   }
-  public getValue() : number {
+  public getValue(): number {
     return this.value;
   }
 }

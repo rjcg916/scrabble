@@ -1,3 +1,3 @@
 export class Word {
-   constructor(private word: string) {}
+  constructor(private word: string) { }
 }

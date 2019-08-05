@@ -1,7 +1,7 @@
 import { Square, SquareType } from './square.model';
-import { row, col, coord} from './coord.model';
+import { row, col, coord } from './coord.model';
 import { Tile } from './tile.model';
-import { t, p } from '@angular/core/src/render3';
+import { t, p, s } from '@angular/core/src/render3';
 import { start } from 'repl';
 
 export enum placement {
@@ -15,9 +15,9 @@ export class Board {
   constructor() {
     this.board = [];
 
-    for (let r: row = row.r1; r < row.r15; r++) {
+    for (let r: row = row.r1; r <= row.r15; r++) {
       this.board[r] = [];
-      for (let c: col = col.c1; c < col.c15; c++) {
+      for (let c: col = col.c1; c <= col.c15; c++) {
         this.board[r][c] = new Square();
       }
     }
@@ -25,9 +25,8 @@ export class Board {
 
   public AreSquaresVacant(start: coord, end: coord): boolean {
 
-    for (let r: row = start.row; r < end.row; r++) {
-      this.board[r] = [];
-      for (let c: col = start.col; c < end.col; c++) {
+    for (let r: row = start.row; r <= end.row; r++) {
+      for (let c: col = start.col; c <= end.col; c++) {
         if (this.board[r][c].IsOccupied())
           return false;
       }
@@ -36,6 +35,31 @@ export class Board {
     return true;
   }
 
+  public PlacmentValue(start: coord, end: coord) : number {
+
+    let letterValue : number = 0;
+
+    // letter based value - compute value of words based upon letters
+    for (let r: row = start.row; r <= end.row; r++) {
+      for (let c: col = start.col; c <= end.col; c++) {
+        let square = this.board[r][c];
+        letterValue += (square.getLetterMultiplier() * square.getTile().getValue());
+      }
+    }
+
+
+    // word based value : compute word-based multipler
+    let wordMultiplier : number = 1;
+    for (let r: row = start.row; r <= end.row; r++) {
+      for (let c: col = start.col; c <= end.col; c++) {
+        let square = this.board[r][c];
+        wordMultiplier *= square.getWordMultiplier();
+      }
+    }
+
+    // apply wordMultipler to letterValue for final value
+    return letterValue * wordMultiplier
+  }
 
   public PlacementType(tiles: Array<Tile>, start: coord, end: coord): placement {
 
@@ -58,6 +82,8 @@ export class Board {
     }
 
   }
+
+
 
   public PlaceTiles(start: coord, tiles: Array<Tile>, tilePlacement: placement): number {
 
@@ -88,8 +114,8 @@ export class Board {
   public getOccupiedCount(): number {
     let count: number = 0;
 
-    for (let r: row = row.r1; r < row.r15; r++) {
-      for (let c: col = col.c1; c < col.c15; c++) {
+    for (let r: row = row.r1; r <= row.r15; r++) {
+      for (let c: col = col.c1; c <= col.c15; c++) {
         count = this.board[r][c].IsOccupied() ? count + 1 : count;
       }
     }

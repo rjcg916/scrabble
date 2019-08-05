@@ -1,4 +1,4 @@
-import {Tile} from '../model/tile.model';
+import { Tile } from '../model/tile.model';
 
 class Frequency {
   constructor(public letter: string, public frequency: number) {
@@ -24,17 +24,17 @@ export class TileBagService {
 
   private letterFrequencies: Array<Frequency> =
     [new Frequency("A", 9),
-     new Frequency("B", 2),
-     new Frequency("C", 2),
-     new Frequency("D", 4),
-     new Frequency("E", 12),
-     new Frequency("F", 2),
-     // TODO - add all leters
-     new Frequency("Y", 2),
-     new Frequency("Z", 1),
-     new Frequency("", 2)];
+    new Frequency("B", 2),
+    new Frequency("C", 2),
+    new Frequency("D", 4),
+    new Frequency("E", 12),
+    new Frequency("F", 2),
+    // TODO - add all leters
+    new Frequency("Y", 2),
+    new Frequency("Z", 1),
+    new Frequency("", 2)];
 
-    private  getValue(letter: string): number {
+  private getValue(letter: string): number {
     // letters are placed in value "buckets"
     // index of array is value
 
@@ -53,8 +53,8 @@ export class TileBagService {
 
   public GetTiles(): Array<Tile> {
 
-    let tiles : Array<Tile> = new Array<Tile>();
-    const frequencies =this.letterFrequencies;
+    let tiles: Array<Tile> = new Array<Tile>();
+    const frequencies = this.letterFrequencies;
 
     for (let l: number = 0; l < frequencies.length; l++) {
 

@@ -77,6 +77,18 @@ describe('Board', () => {
       expect(index).toEqual(row.r9)
     })
 
+    it('placement value of 3', () => {
+
+      out = new Board();
+      tile = new Tile("A", 1);
+      let start = new coord(row.r7, col.c8);
+      let end = new coord(row.r9, col.c8);
+      let index =  out.PlaceTiles(start, [tile, tile, tile], placement.vertical);
+      let value = out.PlacmentValue(start, end);
+      expect(value).toEqual(3);
+
+
+    })
 
   })
 
