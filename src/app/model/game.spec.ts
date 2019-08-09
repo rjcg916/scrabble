@@ -1,4 +1,4 @@
-import {Game} from './game.model';
+import { Game } from './game.model';
 
 
 
@@ -8,6 +8,16 @@ describe('Game', () => {
   beforeEach(() => {
 
   })
+
+  describe(' word to tile', () => {
+    it('bob is 3 tiles', () => {
+      out = new Game(2);
+      expect(out.wordToTiles("bob").length).toEqual(3);
+    })
+
+  }
+
+  )
 
   describe('create', () => {
 
@@ -31,7 +41,7 @@ describe('Game', () => {
 
       out = new Game(3);
 
-      expect(out.getTileBagCount()).toEqual(36 - 21);
+      expect(out.getTileBagCount()).toEqual(100 - 21);
 
     })
 

@@ -1,7 +1,14 @@
-import { Word } from './word.model';
-
 export class Lexicon {
-  constructor(private words: Array<Word>) {
-    words.push(new Word("bob"));
+
+
+  private words = new Array<string>();
+
+  constructor() {
+    this.words.push("bob");
+    this.words.push("dianne");
+  }
+
+   public validWord( word : string) : boolean {
+     return this.words.indexOf(word) > -1;
   }
 }
