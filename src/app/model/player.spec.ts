@@ -23,15 +23,15 @@ describe('Player', () => {
       out = new Player();
 
       let remaining = out.DrawTiles(
-        [new Tile("A", 1),
-        new Tile("B", 1),
-        new Tile("A", 1),
-        new Tile("B", 1),
-        new Tile("A", 1),
-        new Tile("B", 1),
-        new Tile("B", 1),
-        new Tile("A", 1),
-        new Tile("B", 1)
+        [new Tile("A"),
+        new Tile("B"),
+        new Tile("A"),
+        new Tile("B"),
+        new Tile("A"),
+        new Tile("B"),
+        new Tile("B"),
+        new Tile("A"),
+        new Tile("B")
      ]);
 
       expect(remaining.length).toEqual(2);

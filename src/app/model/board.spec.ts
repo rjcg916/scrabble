@@ -95,4 +95,95 @@ describe('Board', () => {
 
   })
 
+  describe('get word from board' , () => {
+    it('word is found', () => {
+
+      out = new Board();
+      let tile1 = new Tile("B");
+      let tile2 = new Tile("O");
+      let tile3 = new Tile("B");
+
+      let start1 = new coord(row._8, col._H);
+
+      out.PlaceTiles(start1, [tile1, tile2], placement.horizontal);
+
+      let start2 = new coord(row._8, col._J);
+
+      out.PlaceTiles(start2, [tile3], placement.horizontal);
+
+      let word = out.squaresToWord( new coord(row._8, col._H), new coord(row._8, col._J))
+      expect(word).toEqual("BOB");
+
+    })
+
+    it('word not found', () => {
+
+      out = new Board();
+      let tile1 = new Tile("B");
+      let tile2 = new Tile("O");
+      let tile3 = new Tile("B");
+
+      let start1 = new coord(row._8, col._H);
+
+      out.PlaceTiles(start1, [tile1, tile2], placement.horizontal);
+
+      let start2 = new coord(row._8, col._K);
+
+      out.PlaceTiles(start2, [tile3], placement.horizontal);
+
+
+      let word = out.squaresToWord( new coord(row._8, col._H), new coord(row._8, col._J))
+      expect(word).toEqual("");
+
+    })
+
+    it('should find run', () => {
+
+      out = new Board();
+      let tile1 = new Tile("A");
+      let tile2 = new Tile("T");
+      let tile3 = new Tile("E");
+
+      let start = new coord(row._8, col._H);
+      out.PlaceTiles(start, [tile1, tile2, tile3], placement.vertical);
+
+      let span = out.findVerticalRun(new coord(row._12, col._H));
+
+      expect(span.start.row).toEqual(row._8);
+      expect(span.end.row).toEqual(row._12);
+    })
+
+    it('should not find run', () => {
+
+      out = new Board();
+      let tile1 = new Tile("A");
+      let tile2 = new Tile("T");
+      let tile3 = new Tile("E");
+
+      let start = new coord(row._8, col._H);
+      out.PlaceTiles(start, [tile1, tile2, tile3], placement.vertical);
+
+      let span = out.findVerticalRun(new coord(row._13, col._H));
+
+    })
+
+    it('should find run on both sides', () => {
+
+      out = new Board();
+      let tile1 = new Tile("A");
+      let tile2 = new Tile("T");
+      let tile3 = new Tile("E");
+
+      let start1 = new coord(row._9, col._H);
+      out.PlaceTiles(start1, [tile1, tile2, tile3], placement.vertical);
+
+      let start2 = new coord(row._13, col._H);
+      out.PlaceTiles(start2, [tile1, tile2, tile3], placement.vertical);
+
+      let span = out.findVerticalRun(new coord(row._12, col._H));
+
+    })
+
+  })
+
 })

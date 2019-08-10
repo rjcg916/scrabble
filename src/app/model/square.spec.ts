@@ -23,7 +23,7 @@ describe('Square', () => {
 
       out = new Square();
 
-      out.place(new Tile("A", 1));
+      out.place(new Tile("A"));
 
       expect(out.IsOccupied()).toEqual(true);
 

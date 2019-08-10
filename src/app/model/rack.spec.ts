@@ -22,15 +22,15 @@ describe('Rack', () => {
 
       out = new Rack();
       out.Fill(
-        [new Tile("A", 1),
-         new Tile("B", 1),
-         new Tile("A", 1),
-         new Tile("B", 1),
-         new Tile("A", 1),
-         new Tile("B", 1),
-         new Tile("B", 1),
-         new Tile("A", 1),
-         new Tile("B", 1)
+        [new Tile("A"),
+         new Tile("B"),
+         new Tile("A"),
+         new Tile("B"),
+         new Tile("A"),
+         new Tile("B"),
+         new Tile("B"),
+         new Tile("A"),
+         new Tile("B")
         ])
 
       expect(out.getTileCount()).toEqual(Rack.capacity);
@@ -41,15 +41,15 @@ describe('Rack', () => {
 
       out = new Rack();
       let remaining = out.Fill(
-        [new Tile("A", 1),
-         new Tile("B", 1),
-         new Tile("A", 1),
-         new Tile("B", 1),
-         new Tile("A", 1),
-         new Tile("B", 1),
-         new Tile("B", 1),
-         new Tile("A", 1),
-         new Tile("B", 1)
+        [new Tile("A"),
+         new Tile("B"),
+         new Tile("A"),
+         new Tile("B"),
+         new Tile("A"),
+         new Tile("B"),
+         new Tile("B"),
+         new Tile("A"),
+         new Tile("B")
     ]);
 
       expect(remaining.length).toEqual(2);
@@ -59,10 +59,10 @@ describe('Rack', () => {
 
       out = new Rack();
       out.Fill(
-        [new Tile("A", 1),
-         new Tile("B", 1),
-         new Tile("A", 1),
-         new Tile("B", 1),
+        [new Tile("A"),
+         new Tile("B"),
+         new Tile("A"),
+         new Tile("B"),
     ])
 
       expect(out.getTileCount()).toEqual(4);
@@ -73,10 +73,10 @@ describe('Rack', () => {
 
       out = new Rack();
       let remaining = out.Fill(
-        [new Tile("A", 1),
-         new Tile("B", 1),
-         new Tile("A", 1),
-         new Tile("B", 1),
+        [new Tile("A"),
+         new Tile("B"),
+         new Tile("A"),
+         new Tile("B"),
     ])
 
     expect(remaining.length).toEqual(0);

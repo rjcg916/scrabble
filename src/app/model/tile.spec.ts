@@ -17,11 +17,19 @@ describe('Tile', () => {
 
     })
 
-    it('a tile with value 1', () => {
+    it('a tile with default value ', () => {
 
-      out = new Tile("A", 1);
+      out = new Tile("A");
 
       expect(out.getValue()).toEqual(1);
+
+    })
+
+    it('a tile with value 4', () => {
+
+      out = new Tile("A", 4);
+
+      expect(out.getValue()).toEqual(4);
 
     })
   })

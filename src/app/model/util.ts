@@ -1,4 +1,5 @@
 import { Tile } from './tile.model';
+import { coord } from './coord.model';
 
 export class Util {
   public static wordToTiles(word: String): Tile[] {
@@ -6,7 +7,7 @@ export class Util {
     let tiles = new Array<Tile>();
 
     for (let i: number = 0; i < word.length; i++) {
-      tiles.push(new Tile(word.substr(i,1), 1))
+      tiles.push(new Tile(word.substr(i, 1)))
     }
 
     return tiles;
@@ -19,4 +20,6 @@ export class Util {
     return aString;
 
   }
+
+
 }

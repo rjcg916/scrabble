@@ -1,23 +1,14 @@
 import { Square, SquareType } from './square.model';
 import { row, col, coord } from './coord.model';
 import { Tile } from './tile.model';
-import { t, p, s } from '@angular/core/src/render3';
+import { t, p, s, L } from '@angular/core/src/render3';
 import { start } from 'repl';
 import { assertDataInRangeInternal } from '@angular/core/src/render3/util';
-import { Util} from './util';
+import { Util } from './util';
+import { Lexicon } from './lexicon.model';
 
 export enum placement {
   horizontal, vertical, invalid
-}
-
-export class Word {
-  constructor(private startAt: coord, private endAt) {
-  }
-  public isValid(): boolean {
-    // check lexicon
-    return true;
-  }
-
 }
 
 export class Move {
@@ -25,19 +16,10 @@ export class Move {
   constructor(private startAt: coord, private letters: string, alignment: placement) {
     this.tiles = Util.wordToTiles(letters);
   }
+}
 
-  public squaresVacant() {
-    // squares vacant
-
-  }
-  public candidateWords() {
-    // generate a list of words created by move
-    // validate all words created
-  }
-  public validWords() {
-    // for each candidate, check
-  }
-
+export class Span {
+  constructor(public start: coord, public end: coord) { }
 }
 
 export class Board {
@@ -75,7 +57,86 @@ export class Board {
   }
 
 
+  public squaresToWord(start: coord, end: coord): string {
 
+    let aString: string = "";
+
+    for (let r: row = start.row; r <= end.row; r++) {
+      for (let c: col = start.col; c <= end.col; c++) {
+        // todo: handle missing tile
+        let square = this.board[r][c];
+        if (square.IsOccupied())
+          aString = aString.concat(square.getTile().getLetter());
+        else
+          return "";
+      }
+    }
+
+    return aString;
+
+  }
+
+
+  public findVerticalRun(startAt: coord): Span {
+
+    let startRow  = startAt.row;
+    let topRow    = startAt.row;
+    let bottomRow = startAt.row;
+
+    // if at top, no run
+    if (startRow != row._1)
+      // check for run above
+      for (let r = startRow; r >= row._1; r--) {
+        if (!this.board[r][startAt.col].IsOccupied()) {
+          topRow = r;
+          break;
+        }
+      }
+
+    // if at bottom, no run
+    if (startRow != row._15)
+      // check for run below
+      for (let r = startRow; r <= row._15; r++) {
+        if (!this.board[r][startAt.col].IsOccupied()) {
+          bottomRow = r;
+          break;
+        }
+      }
+
+    if (bottomRow == topRow)
+      return null;
+
+    if ((bottomRow != startRow ) && (topRow != startRow))
+      return new Span(new coord(topRow, startAt.col), new coord(bottomRow, startAt.col));
+
+    if (topRow != startRow)
+      return new Span(new coord(topRow, startAt.col), new coord(startAt.row, startAt.col));
+
+    if (bottomRow != startRow)
+      return new Span(new coord(startAt.row, startAt.col), new coord(bottomRow, startAt.col));
+
+  }
+
+
+  public candidateWords(theMove: Move): Array<string> {
+    // generate a list of words created by move
+
+    return new Array<string>();
+  }
+
+  public allValidWords(words: Array<string>): boolean {
+    let lexicon = new Lexicon();
+    // for each candidate, check
+    words.forEach(w => {
+      if (!lexicon.validWord(w))
+        return false;
+    })
+    return true;
+  }
+
+  //public squaresVacant(theMove : Move) : boolean {
+  //  return true;
+  //}
   public SquaresVacant?(start: coord, end: coord): boolean {
 
     for (let r: row = start.row; r <= end.row; r++) {
