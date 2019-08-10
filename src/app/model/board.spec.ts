@@ -2,6 +2,7 @@ import { Board, placement } from './board.model';
 import { coord, row, col} from './coord.model';
 import { Tile } from './tile.model';
 import { p } from '@angular/core/src/render3';
+import { Util } from './util';
 
 
 describe('Board', () => {
@@ -11,6 +12,8 @@ describe('Board', () => {
   beforeEach(() => {
 
   })
+
+
 
   describe('add tiles', () => {
 

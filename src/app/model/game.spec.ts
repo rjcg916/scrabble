@@ -9,15 +9,7 @@ describe('Game', () => {
 
   })
 
-  describe(' word to tile', () => {
-    it('bob is 3 tiles', () => {
-      out = new Game(2);
-      expect(out.wordToTiles("bob").length).toEqual(3);
-    })
 
-  }
-
-  )
 
   describe('create', () => {
 

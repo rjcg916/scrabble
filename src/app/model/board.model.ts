@@ -3,9 +3,41 @@ import { row, col, coord } from './coord.model';
 import { Tile } from './tile.model';
 import { t, p, s } from '@angular/core/src/render3';
 import { start } from 'repl';
+import { assertDataInRangeInternal } from '@angular/core/src/render3/util';
+import { Util} from './util';
 
 export enum placement {
   horizontal, vertical, invalid
+}
+
+export class Word {
+  constructor(private startAt: coord, private endAt) {
+  }
+  public isValid(): boolean {
+    // check lexicon
+    return true;
+  }
+
+}
+
+export class Move {
+  private tiles;
+  constructor(private startAt: coord, private letters: string, alignment: placement) {
+    this.tiles = Util.wordToTiles(letters);
+  }
+
+  public squaresVacant() {
+    // squares vacant
+
+  }
+  public candidateWords() {
+    // generate a list of words created by move
+    // validate all words created
+  }
+  public validWords() {
+    // for each candidate, check
+  }
+
 }
 
 export class Board {
@@ -42,6 +74,8 @@ export class Board {
 
   }
 
+
+
   public SquaresVacant?(start: coord, end: coord): boolean {
 
     for (let r: row = start.row; r <= end.row; r++) {
@@ -54,9 +88,9 @@ export class Board {
     return true;
   }
 
-  public GetPlacmentValue(start: coord, end: coord) : number {
+  public GetPlacmentValue(start: coord, end: coord): number {
 
-    let letterValue : number = 0;
+    let letterValue: number = 0;
 
     // letter based value - compute value of words based upon letters
     for (let r: row = start.row; r <= end.row; r++) {
@@ -68,7 +102,7 @@ export class Board {
 
 
     // word based value : compute word-based multipler
-    let wordMultiplier : number = 1;
+    let wordMultiplier: number = 1;
     for (let r: row = start.row; r <= end.row; r++) {
       for (let c: col = start.col; c <= end.col; c++) {
         let square = this.board[r][c];
@@ -141,31 +175,31 @@ export class Board {
   }
 
 
-   private setSquareValue(locs : Array<coord>, t: SquareType) {
-      locs.forEach(square => {
-          this.board[square.row][square.col].setType(t)
-      });
-   }
+  private setSquareValue(locs: Array<coord>, t: SquareType) {
+    locs.forEach(square => {
+      this.board[square.row][square.col].setType(t)
+    });
+  }
 
-   private tripleWord() {
-      this.setSquareValue(
-        [
-          new coord(row._1, col._A),
-          new coord(row._1, col._H),
-          new coord(row._1, col._O),
+  private tripleWord() {
+    this.setSquareValue(
+      [
+        new coord(row._1, col._A),
+        new coord(row._1, col._H),
+        new coord(row._1, col._O),
 
-          new coord(row._8, col._A),
-          new coord(row._8, col._O),
+        new coord(row._8, col._A),
+        new coord(row._8, col._O),
 
-          new coord(row._15, col._A),
-          new coord(row._15, col._H),
-          new coord(row._15, col._O)
-        ]
-        , SquareType.tw
-      )
-   }
+        new coord(row._15, col._A),
+        new coord(row._15, col._H),
+        new coord(row._15, col._O)
+      ]
+      , SquareType.tw
+    )
+  }
 
-  private doubleWord(t : SquareType) {
+  private doubleWord(t: SquareType) {
 
     this.board[row._2][col._B].setType(t);
     this.board[row._2][col._N].setType(t);
@@ -193,7 +227,7 @@ export class Board {
 
   }
 
-  private doubleLetter(t : SquareType){
+  private doubleLetter(t: SquareType) {
 
     this.board[row._1][col._D].setType(t);
     this.board[row._1][col._L].setType(t);
@@ -230,7 +264,7 @@ export class Board {
 
   }
 
-  private tripleLetter(t : SquareType) {
+  private tripleLetter(t: SquareType) {
 
     this.board[row._2][col._F].setType(t);
     this.board[row._2][col._J].setType(t);

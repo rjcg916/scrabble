@@ -1,4 +1,8 @@
-export class Lexicon {
+export interface ILexicon {
+  validWord(word: string) : boolean;
+}
+
+export class Lexicon implements ILexicon {
 
 
   private words = new Array<string>();

@@ -1,6 +1,6 @@
 import { Rack } from './rack.model';
 import { Tile } from './tile.model';
-import { Board, placement } from './board.model';
+import { Board, Move, placement } from './board.model';
 import { coord, row, col } from './coord.model'
 
 export class Player {
@@ -12,7 +12,7 @@ export class Player {
     return this.rack.Fill(availableTiles);
   }
 
-  public PlaceTiles(start: coord, tiles: Array<Tile>, placement: placement) {
+  public PlaceTiles(move : Move) {
     //place tiles
 
   }

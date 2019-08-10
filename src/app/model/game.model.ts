@@ -1,4 +1,4 @@
-import { Board, placement } from './board.model';
+import { Board, placement, Move } from './board.model';
 import { coord, row, col } from './coord.model';
 import { Player } from './player.model';
 import { Lexicon } from './lexicon.model';
@@ -10,7 +10,7 @@ export class Game {
   // game has board/squares, players/racks, lexicon, tilebag
   private board: Board;
   private players: Player[];
-  private lexicon: Lexicon = new Lexicon();
+  private lexicon: Lexicon;
   private tileBag: Tile[] = new Array<Tile>();
   private numberOfPlayers: number;
   private tileBagService = new TileBagService();
@@ -34,17 +34,10 @@ export class Game {
     this.board = new Board();
 
     // initialize/choose lexicon
+    this.lexicon = new Lexicon();
   }
 
-  public wordToTiles(word : String) : Tile[] {
-    let tiles = new Array<Tile>();
 
-    for (let c : number = 0; c < word.length; c++) {
-      tiles.push( new Tile( word.charAt[c], 1))
-    }
-
-    return tiles;
-  }
 
   public getName(): string {
     return this.name;
@@ -58,19 +51,22 @@ export class Game {
 
   public play() {
 
-    while (!this.gameDone) {
 
-      let tiles = Array<Tile>();
-      tiles.push(new Tile("A", 1));
-      tiles.push(new Tile("T", 3));
+    // for  each player
+    //  options: swap, pass, move
+    //   move: select tiles & placement
+    //         validate placement - empty squares, valid words, score
+    //         confirm placement
+    //         draw tiles
+    //   check status
+    //       game over
 
-    //  this.players[this.activePlayer].PlaceTiles(new coord(row.r8, col.c8), tiles, placement.horizontal);
-    //  this.board.PlaceTiles(new coord(row.r8, col.c8), tiles, placement.horizontal);
-      this.gameDone = true;
+
+    let m = new Move(new coord(row._8, col._H), "at", placement.horizontal);
+   // this.players[this.activePlayer].PlaceTiles(m);
+
     }
 
   }
-
-}
 
 
