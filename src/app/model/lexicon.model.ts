@@ -1,5 +1,5 @@
 export interface ILexicon {
-  validWord(word: string) : boolean;
+  isWordValid(word: string) : boolean;
 }
 
 export class Lexicon implements ILexicon {
@@ -12,7 +12,7 @@ export class Lexicon implements ILexicon {
     this.words.push("dianne");
   }
 
-   public validWord( word : string) : boolean {
+   public isWordValid( word : string) : boolean {
      return this.words.indexOf(word) > -1;
   }
 }

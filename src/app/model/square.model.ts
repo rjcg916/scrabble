@@ -14,11 +14,11 @@ export class Square {
     this.tile = tile;
   }
 
-  public place(tile: Tile) {
+  public Place(tile: Tile) {
     this.tile = tile;
   }
 
-  public IsOccupied() {
+  public isOccupied() {
     return this.tile !== null;
   }
 
@@ -26,7 +26,7 @@ export class Square {
     return this.tile;
   }
 
-  public setType(type : SquareType) {
+  public SetType(type : SquareType) {
     this.type = type;
   }
 

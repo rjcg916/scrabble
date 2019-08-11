@@ -8,7 +8,8 @@ export class Rack {
   }
 
 
-  public Fill(tileSource: Array<Tile>): Array<Tile> {
+
+  public FillWithTiles(tileSource: Array<Tile>): Array<Tile> {
     let tilesNeeded = Rack.capacity - this.rack.length;
     let tilesAvailable = tileSource.length;
 
@@ -18,6 +19,14 @@ export class Rack {
     this.rack = this.rack.concat(tilesToAdd);
 
     return tileSource;
+  }
+
+  public RemoveTiles(tilesToRemove: Array<Tile>) {
+    tilesToRemove.forEach(t => {
+         let i = this.rack.findIndex( r => r.getLetter() == t.getLetter());
+          if (i > -1)
+              this.rack.splice(i, 1);
+    })
   }
 
   public getTileCount(): number {

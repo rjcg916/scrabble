@@ -54,15 +54,22 @@ export class Game {
 
     // for  each player
     //  options: swap, pass, move
-    //   move: select tiles & placement
-    //         validate placement - empty squares, valid words, score
-    //         confirm placement
-    //         draw tiles
+    //   move:
     //   check status
     //       game over
 
+    // Move: proposed move
+    //  are letters in rack?
+    //  proposed placment
+    //  what runs does placement generate
+    //    are all runs valid words?
+    //
+    //  score the move
+    //  remove the tiles from rack
+    //  draw new tiles
 
     let m = new Move(new coord(row._8, col._H), "at", placement.horizontal);
+
    // this.players[this.activePlayer].PlaceTiles(m);
 
     }

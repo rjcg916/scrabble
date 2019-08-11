@@ -21,7 +21,7 @@ describe('Rack', () => {
     it('and completely fill', () => {
 
       out = new Rack();
-      out.Fill(
+      out.FillWithTiles(
         [new Tile("A"),
          new Tile("B"),
          new Tile("A"),
@@ -40,7 +40,7 @@ describe('Rack', () => {
     it('2 tiles left in TileBag', () => {
 
       out = new Rack();
-      let remaining = out.Fill(
+      let remaining = out.FillWithTiles(
         [new Tile("A"),
          new Tile("B"),
          new Tile("A"),
@@ -58,7 +58,7 @@ describe('Rack', () => {
     it('and partially fill', () => {
 
       out = new Rack();
-      out.Fill(
+      out.FillWithTiles(
         [new Tile("A"),
          new Tile("B"),
          new Tile("A"),
@@ -72,7 +72,7 @@ describe('Rack', () => {
     it('no tiles left in tile bag', () => {
 
       out = new Rack();
-      let remaining = out.Fill(
+      let remaining = out.FillWithTiles(
         [new Tile("A"),
          new Tile("B"),
          new Tile("A"),
@@ -83,6 +83,100 @@ describe('Rack', () => {
 
     })
 
+
+  })
+
+
+  describe('create ', () => {
+
+
+    it('and remove one', () => {
+
+      out = new Rack();
+      out.FillWithTiles(
+        [new Tile("A"),
+         new Tile("B"),
+         new Tile("C"),
+         new Tile("D"),
+         new Tile("E"),
+         new Tile("F"),
+         new Tile("G")
+        ])
+
+      expect(out.getTileCount()).toEqual(7);
+
+      out.RemoveTiles( [new Tile("A")] );
+
+      expect(out.getTileCount()).toEqual(6);
+
+
+    })
+
+    it('and remove one with dup letters', () => {
+
+      out = new Rack();
+      out.FillWithTiles(
+        [new Tile("A"),
+         new Tile("B"),
+         new Tile("C"),
+         new Tile("D"),
+         new Tile("E"),
+         new Tile("F"),
+         new Tile("A")
+        ])
+
+      expect(out.getTileCount()).toEqual(7);
+
+      out.RemoveTiles( [new Tile("A")] );
+
+      expect(out.getTileCount()).toEqual(6);
+
+
+    })
+
+    it('and remove two ', () => {
+
+      out = new Rack();
+      out.FillWithTiles(
+        [new Tile("A"),
+         new Tile("B"),
+         new Tile("C"),
+         new Tile("D"),
+         new Tile("B"),
+         new Tile("F"),
+         new Tile("A")
+        ])
+
+      expect(out.getTileCount()).toEqual(7);
+
+      out.RemoveTiles( [new Tile("A"), new Tile("B")] );
+
+      expect(out.getTileCount()).toEqual(5);
+
+
+    })
+
+    it('and remove two dups ', () => {
+
+      out = new Rack();
+      out.FillWithTiles(
+        [new Tile("A"),
+         new Tile("B"),
+         new Tile("C"),
+         new Tile("D"),
+         new Tile("B"),
+         new Tile("F"),
+         new Tile("A")
+        ])
+
+      expect(out.getTileCount()).toEqual(7);
+
+      out.RemoveTiles( [new Tile("A"), new Tile("A")] );
+
+      expect(out.getTileCount()).toEqual(5);
+
+
+    })
 
   })
 })

@@ -21,7 +21,7 @@ describe('Board', () => {
       let start = new coord(row._8, col._H);
       out.PlaceTiles(start, [tile], placement.horizontal);
 
-      expect(out.GetOccupiedCount()).toEqual(1);
+      expect(out.getOccupiedCount()).toEqual(1);
 
     })
 
@@ -32,7 +32,7 @@ describe('Board', () => {
 
       out.PlaceTiles(new coord(row._8, col._H), [tile, tile, tile], placement.horizontal);
 
-      expect(out.GetOccupiedCount()).toEqual(3);
+      expect(out.getOccupiedCount()).toEqual(3);
 
     })
 
@@ -41,7 +41,7 @@ describe('Board', () => {
       out = new Board();
       tile = new Tile("A", 1);
 
-      let placementType: placement = out.GetPlacementType([tile, tile, tile], new coord(row._8, col._H), new coord(row._8, col._J));
+      let placementType: placement = out.getPlacementType([tile, tile, tile], new coord(row._8, col._H), new coord(row._8, col._J));
 
       expect(placementType).toEqual(placement.horizontal);
 
@@ -62,7 +62,7 @@ describe('Board', () => {
       tile = new Tile("A", 1);
       let start = new coord(row._8, col._H);
       let end = new coord(row._10, col._H);
-      let placementType: placement = out.GetPlacementType([tile, tile, tile], start, end);
+      let placementType: placement = out.getPlacementType([tile, tile, tile], start, end);
 
       expect(placementType).toEqual(placement.vertical);
 
@@ -84,7 +84,7 @@ describe('Board', () => {
       let start = new coord(row._7, col._H);
       let end = new coord(row._9, col._H);
       let index = out.PlaceTiles(start, [tile, tile, tile], placement.vertical);
-      let value = out.GetPlacmentValue(start, end);
+      let value = out.getPlacmentValue(start, end);
       expect(value).toEqual(3);
 
 
@@ -105,7 +105,7 @@ describe('Board', () => {
       let start2 = new coord(row._13, col._H);
       out.PlaceTiles(start2, [tileA, tileB, tileC], placement.vertical);
 
-      let count = out.GetOccupiedCount();
+      let count = out.getOccupiedCount();
       expect(count).toEqual(6);
 
     })
@@ -128,7 +128,7 @@ describe('Board', () => {
 
       out.PlaceTiles(start2, [tile3], placement.horizontal);
 
-      let word = out.squaresToWord(new coord(row._8, col._H), new coord(row._8, col._J))
+      let word = out.getWordFromSquares(new coord(row._8, col._H), new coord(row._8, col._J))
       expect(word).toEqual("BOB");
 
     })
@@ -149,7 +149,7 @@ describe('Board', () => {
       out.PlaceTiles(start2, [tile3], placement.horizontal);
 
 
-      let word = out.squaresToWord(new coord(row._8, col._H), new coord(row._8, col._J))
+      let word = out.getWordFromSquares(new coord(row._8, col._H), new coord(row._8, col._J))
       expect(word).toEqual("");
 
     })

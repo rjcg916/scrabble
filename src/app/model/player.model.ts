@@ -9,7 +9,7 @@ export class Player {
     this.rack = new Rack();
   }
   public DrawTiles(availableTiles: Array<Tile>): Array<Tile> {
-    return this.rack.Fill(availableTiles);
+    return this.rack.FillWithTiles(availableTiles);
   }
 
   public PlaceTiles(move : Move) {

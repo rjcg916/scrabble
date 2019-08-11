@@ -32,7 +32,7 @@ export class Board {
     // set square values
 
     // start
-    this.board[row._8][col._H].setType(SquareType.start);
+    this.board[row._8][col._H].SetType(SquareType.start);
 
     // double letters
     this.doubleLetter(SquareType.dl);
@@ -49,7 +49,7 @@ export class Board {
   }
 
 
-  public squaresToWord(start: coord, end: coord): string {
+  public getWordFromSquares(start: coord, end: coord): string {
 
     let aString: string = "";
 
@@ -57,7 +57,7 @@ export class Board {
       for (let c: col = start.col; c <= end.col; c++) {
         // todo: handle missing tile
         let square = this.board[r][c];
-        if (square.IsOccupied())
+        if (square.isOccupied())
           aString = aString.concat(square.getTile().getLetter());
         else
           return "";
@@ -119,18 +119,18 @@ export class Board {
     let lexicon = new Lexicon();
     // for each candidate, check
     words.forEach(w => {
-      if (!lexicon.validWord(w))
+      if (!lexicon.isWordValid(w))
         return false;
     })
     return true;
   }
 
 
-  public SquaresVacant?(start: coord, end: coord): boolean {
+  public squaresVacant?(start: coord, end: coord): boolean {
 
     for (let r: row = start.row; r <= end.row; r++) {
       for (let c: col = start.col; c <= end.col; c++) {
-        if (this.board[r][c].IsOccupied())
+        if (this.board[r][c].isOccupied())
           return false;
       }
     }
@@ -138,7 +138,7 @@ export class Board {
     return true;
   }
 
-  public GetPlacmentValue(start: coord, end: coord): number {
+  public getPlacmentValue(start: coord, end: coord): number {
 
     let letterValue: number = 0;
 
@@ -164,7 +164,7 @@ export class Board {
     return letterValue * wordMultiplier
   }
 
-  public GetPlacementType(tiles: Array<Tile>, start: coord, end: coord): placement {
+  public getPlacementType(tiles: Array<Tile>, start: coord, end: coord): placement {
 
     let horizontal: boolean = start.row === end.row;
     let horizontalNumberOfTiles: number = end.col - start.col + 1;
@@ -192,7 +192,7 @@ export class Board {
       case placement.vertical: {
         let row = start.row - 1;
         tiles.forEach(t => {
-          this.board[++row][start.col].place(t);
+          this.board[++row][start.col].Place(t);
         })
         return row;
         break;
@@ -200,7 +200,7 @@ export class Board {
       case placement.horizontal: {
         let col = start.col - 1;
         tiles.forEach(t => {
-          this.board[start.row][++col].place(t);
+          this.board[start.row][++col].Place(t);
         })
         return col;
         break;
@@ -212,12 +212,12 @@ export class Board {
     }
   }
 
-  public GetOccupiedCount(): number {
+  public getOccupiedCount(): number {
     let count: number = 0;
 
     for (let r: row = row._1; r <= row._15; r++) {
       for (let c: col = col._A; c <= col._O; c++) {
-        count = this.board[r][c].IsOccupied() ? count + 1 : count;
+        count = this.board[r][c].isOccupied() ? count + 1 : count;
       }
     }
 
@@ -225,14 +225,14 @@ export class Board {
   }
 
 
-  private setSquareValue(locs: Array<coord>, t: SquareType) {
+  private SetSquareValue(locs: Array<coord>, t: SquareType) {
     locs.forEach(square => {
-      this.board[square.row][square.col].setType(t)
+      this.board[square.row][square.col].SetType(t)
     });
   }
 
   private tripleWord() {
-    this.setSquareValue(
+    this.SetSquareValue(
       [
         new coord(row._1, col._A),
         new coord(row._1, col._H),
@@ -251,86 +251,86 @@ export class Board {
 
   private doubleWord(t: SquareType) {
 
-    this.board[row._2][col._B].setType(t);
-    this.board[row._2][col._N].setType(t);
+    this.board[row._2][col._B].SetType(t);
+    this.board[row._2][col._N].SetType(t);
 
-    this.board[row._3][col._C].setType(t);
-    this.board[row._3][col._M].setType(t);
+    this.board[row._3][col._C].SetType(t);
+    this.board[row._3][col._M].SetType(t);
 
-    this.board[row._4][col._D].setType(t);
-    this.board[row._4][col._L].setType(t);
+    this.board[row._4][col._D].SetType(t);
+    this.board[row._4][col._L].SetType(t);
 
-    this.board[row._5][col._E].setType(t);
-    this.board[row._5][col._K].setType(t);
+    this.board[row._5][col._E].SetType(t);
+    this.board[row._5][col._K].SetType(t);
 
-    this.board[row._14][col._B].setType(t);
-    this.board[row._14][col._N].setType(t);
+    this.board[row._14][col._B].SetType(t);
+    this.board[row._14][col._N].SetType(t);
 
-    this.board[row._13][col._C].setType(t);
-    this.board[row._13][col._M].setType(t);
+    this.board[row._13][col._C].SetType(t);
+    this.board[row._13][col._M].SetType(t);
 
-    this.board[row._12][col._D].setType(t);
-    this.board[row._12][col._L].setType(t);
+    this.board[row._12][col._D].SetType(t);
+    this.board[row._12][col._L].SetType(t);
 
-    this.board[row._11][col._E].setType(t);
-    this.board[row._11][col._K].setType(t);
+    this.board[row._11][col._E].SetType(t);
+    this.board[row._11][col._K].SetType(t);
 
   }
 
   private doubleLetter(t: SquareType) {
 
-    this.board[row._1][col._D].setType(t);
-    this.board[row._1][col._L].setType(t);
+    this.board[row._1][col._D].SetType(t);
+    this.board[row._1][col._L].SetType(t);
 
-    this.board[row._3][col._G].setType(t);
-    this.board[row._3][col._I].setType(t);
+    this.board[row._3][col._G].SetType(t);
+    this.board[row._3][col._I].SetType(t);
 
-    this.board[row._4][col._A].setType(t);
-    this.board[row._4][col._H].setType(t);
-    this.board[row._4][col._O].setType(t);
+    this.board[row._4][col._A].SetType(t);
+    this.board[row._4][col._H].SetType(t);
+    this.board[row._4][col._O].SetType(t);
 
-    this.board[row._7][col._C].setType(t);
-    this.board[row._7][col._G].setType(t);
-    this.board[row._7][col._I].setType(t);
-    this.board[row._7][col._M].setType(t);
+    this.board[row._7][col._C].SetType(t);
+    this.board[row._7][col._G].SetType(t);
+    this.board[row._7][col._I].SetType(t);
+    this.board[row._7][col._M].SetType(t);
 
-    this.board[row._8][col._D].setType(t);
-    this.board[row._8][col._L].setType(t);
+    this.board[row._8][col._D].SetType(t);
+    this.board[row._8][col._L].SetType(t);
 
-    this.board[row._9][col._C].setType(t);
-    this.board[row._9][col._G].setType(t);
-    this.board[row._9][col._I].setType(t);
-    this.board[row._9][col._M].setType(t);
+    this.board[row._9][col._C].SetType(t);
+    this.board[row._9][col._G].SetType(t);
+    this.board[row._9][col._I].SetType(t);
+    this.board[row._9][col._M].SetType(t);
 
-    this.board[row._12][col._A].setType(t);
-    this.board[row._12][col._H].setType(t);
-    this.board[row._12][col._O].setType(t);
+    this.board[row._12][col._A].SetType(t);
+    this.board[row._12][col._H].SetType(t);
+    this.board[row._12][col._O].SetType(t);
 
-    this.board[row._13][col._G].setType(t);
-    this.board[row._13][col._I].setType(t);
+    this.board[row._13][col._G].SetType(t);
+    this.board[row._13][col._I].SetType(t);
 
-    this.board[row._15][col._D].setType(t);
-    this.board[row._15][col._L].setType(t);
+    this.board[row._15][col._D].SetType(t);
+    this.board[row._15][col._L].SetType(t);
 
   }
 
   private tripleLetter(t: SquareType) {
 
-    this.board[row._2][col._F].setType(t);
-    this.board[row._2][col._J].setType(t);
+    this.board[row._2][col._F].SetType(t);
+    this.board[row._2][col._J].SetType(t);
 
-    this.board[row._6][col._B].setType(t);
-    this.board[row._6][col._F].setType(t);
-    this.board[row._6][col._J].setType(t);
-    this.board[row._6][col._N].setType(t);
+    this.board[row._6][col._B].SetType(t);
+    this.board[row._6][col._F].SetType(t);
+    this.board[row._6][col._J].SetType(t);
+    this.board[row._6][col._N].SetType(t);
 
-    this.board[row._14][col._F].setType(t);
-    this.board[row._14][col._J].setType(t);
+    this.board[row._14][col._F].SetType(t);
+    this.board[row._14][col._J].SetType(t);
 
-    this.board[row._10][col._B].setType(t);
-    this.board[row._10][col._F].setType(t);
-    this.board[row._10][col._J].setType(t);
-    this.board[row._10][col._N].setType(t);
+    this.board[row._10][col._B].SetType(t);
+    this.board[row._10][col._F].SetType(t);
+    this.board[row._10][col._J].SetType(t);
+    this.board[row._10][col._N].SetType(t);
 
   }
 

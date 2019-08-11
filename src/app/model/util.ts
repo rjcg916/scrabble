@@ -33,7 +33,7 @@ export class Util {
     if (startSquare > 0) {
       firstSquare = 0;
       for (let l = startSquare - 1; l >= 0; l--) {
-        if (!slice[l].IsOccupied()) {
+        if (!slice[l].isOccupied()) {
           firstSquare = l + 1;
           break;
         }
@@ -45,7 +45,7 @@ export class Util {
     if (endSquare < slice.length - 1) {
       lastSquare = slice.length - 1;
       for (let r = endSquare + 1; r <= slice.length -1; r++) {
-        if (!slice[r].IsOccupied()) {
+        if (!slice[r].isOccupied()) {
           lastSquare = r - 1;
           break;
         }
