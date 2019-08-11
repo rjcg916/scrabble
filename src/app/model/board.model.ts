@@ -77,6 +77,49 @@ export class Board {
   }
 
 
+  public findHorizontalRun(startAt: coord): Span {
+
+    let startCol  = startAt.col;
+    let leftCol    = startAt.col;
+    let rightCol = startAt.col;
+
+    // if at top, no run
+    if (startCol > col._A) {
+      leftCol = col._A;
+      // check for run above
+      for (let c = startCol - 1; c >= col._A; c--) {
+        if (!this.board[startAt.row][c].IsOccupied()) {
+          leftCol = c + 1;
+          break;
+        }
+      }
+    }
+    // if at bottom, no run
+    if (startCol < col._O) {
+      rightCol = col._O;
+      // check for run below
+      for (let c = startCol + 1; c <= col._O; c++) {
+        if (!this.board[startAt.row][c].IsOccupied()) {
+          rightCol = c - 1;
+          break;
+        }
+      }
+    }
+
+    if (leftCol == rightCol)
+      return null;
+
+    if ((rightCol != startCol ) && (leftCol != startCol))
+      return new Span(new coord(startAt.row, leftCol), new coord(startAt.row, rightCol));
+
+    if (leftCol != startCol)
+      return new Span(new coord(startAt.row, leftCol), new coord(startAt.row, startAt.col));
+
+    if (rightCol != startCol)
+      return new Span(new coord(startAt.row, startAt.col), new coord(startAt.row, rightCol));
+
+  }
+
   public findVerticalRun(startAt: coord): Span {
 
     let startRow  = startAt.row;
@@ -84,24 +127,27 @@ export class Board {
     let bottomRow = startAt.row;
 
     // if at top, no run
-    if (startRow != row._1)
+    if (startRow > row._1) {
+      topRow = row._1;
       // check for run above
-      for (let r = startRow; r >= row._1; r--) {
+      for (let r = startRow - 1; r >= row._1; r--) {
         if (!this.board[r][startAt.col].IsOccupied()) {
-          topRow = r;
+          topRow = r + 1;
           break;
         }
       }
-
+    }
     // if at bottom, no run
-    if (startRow != row._15)
+    if (startRow < row._15) {
+      bottomRow = row._15;
       // check for run below
-      for (let r = startRow; r <= row._15; r++) {
+      for (let r = startRow + 1; r <= row._15; r++) {
         if (!this.board[r][startAt.col].IsOccupied()) {
-          bottomRow = r;
+          bottomRow = r - 1;
           break;
         }
       }
+    }
 
     if (bottomRow == topRow)
       return null;
@@ -198,22 +244,22 @@ export class Board {
   }
 
   public PlaceTiles(start: coord, tiles: Array<Tile>, tilePlacement: placement): number {
-
+    // return last index
     switch (+tilePlacement) {
       case placement.vertical: {
-        let row = start.row;
+        let row = start.row - 1;
         tiles.forEach(t => {
-          this.board[row++][start.col].place(t);
+          this.board[++row][start.col].place(t);
         })
-        return row - 1;
+        return row ;
         break;
       }
       case placement.horizontal: {
-        let col = start.col;
+        let col = start.col - 1;
         tiles.forEach(t => {
-          this.board[start.row][col++].place(t);
+          this.board[start.row][++col].place(t);
         })
-        return col - 1;
+        return col;
         break;
       }
       case placement.invalid: {
