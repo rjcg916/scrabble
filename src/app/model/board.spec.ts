@@ -1,8 +1,6 @@
 import { Board, placement } from './board.model';
 import { coord, row, col } from './coord.model';
 import { Tile } from './tile.model';
-import { p } from '@angular/core/src/render3';
-import { Util } from './util';
 
 
 describe('Board', () => {
@@ -12,7 +10,6 @@ describe('Board', () => {
   beforeEach(() => {
 
   })
-
 
 
   describe('add tiles', () => {
@@ -157,6 +154,7 @@ describe('Board', () => {
 
     })
 
+
     it('should find run', () => {
 
       out = new Board();
@@ -167,7 +165,8 @@ describe('Board', () => {
       let start = new coord(row._8, col._H);
       out.PlaceTiles(start, [tile1, tile2, tile3], placement.vertical);
 
-      let span = out.findVerticalRun(new coord(row._11, col._H));
+//      let span = out.findVerticalRun(new coord(row._11, col._H));
+       let span = out.findSecondaryRunVertical(new coord(row._11, col._H));
 
       expect(span.start.row).toEqual(row._8);
       expect(span.end.row).toEqual(row._11);
@@ -183,7 +182,8 @@ describe('Board', () => {
       let start = new coord(row._8, col._H);
       out.PlaceTiles(start, [tile1, tile2, tile3], placement.vertical);
 
-      let span = out.findVerticalRun(new coord(row._12, col._H));
+      //let span = out.findVerticalRun(new coord(row._12, col._H));
+      let span = out.findSecondaryRunVertical(new coord(row._12, col._H));
 
       expect(span).toBeNull();
 
@@ -205,7 +205,9 @@ describe('Board', () => {
       let start2 = new coord(row._13, col._H);
       out.PlaceTiles(start2, [tileA, tileB, tileC], placement.vertical);
 
-      let span = out.findVerticalRun(new coord(row._12, col._H));
+      //let span = out.findVerticalRun(new coord(row._12, col._H));
+      let span = out.findSecondaryRunVertical(new coord(row._12, col._H));
+
       expect(span.start.row).toEqual(row._9);
       expect(span.end.row).toEqual(row._15);
     })
@@ -226,7 +228,9 @@ describe('Board', () => {
       let start2 = new coord(row._9, col._G);
       out.PlaceTiles(start2, [tileA, tileB, tileC], placement.horizontal);
 
-      let span = out.findHorizontalRun(new coord(row._9, col._F));
+      //let span = out.findHorizontalRun(new coord(row._9, col._F));
+      let span = out.findSecondaryRunHorizontal(new coord(row._9, col._F));
+
       expect(span.start.col).toEqual(col._C);
       expect(span.end.col).toEqual(col._I);
     })

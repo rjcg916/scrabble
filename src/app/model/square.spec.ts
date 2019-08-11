@@ -1,5 +1,5 @@
 import {Square} from './square.model';
-import { T } from '@angular/core/src/render3';
+
 import { Tile } from './tile.model';
 
 describe('Square', () => {
@@ -24,6 +24,19 @@ describe('Square', () => {
       out = new Square();
 
       out.place(new Tile("A"));
+
+      expect(out.IsOccupied()).toEqual(true);
+
+    })
+
+  })
+
+  describe('constructor ', () => {
+
+
+    it('occupied square', () => {
+
+      out = new Square(new Tile("A"));
 
       expect(out.IsOccupied()).toEqual(true);
 

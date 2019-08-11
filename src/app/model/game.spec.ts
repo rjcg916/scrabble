@@ -1,7 +1,6 @@
 import { Game } from './game.model';
 
 
-
 describe('Game', () => {
   let out: Game;
 

@@ -1,7 +1,7 @@
 import { Rack } from './rack.model';
 import { Tile } from './tile.model';
-import { Board, Move, placement } from './board.model';
-import { coord, row, col } from './coord.model'
+import { Move } from './board.model';
+
 
 export class Player {
   private rack: Rack;

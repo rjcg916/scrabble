@@ -1,9 +1,6 @@
 import { Square, SquareType } from './square.model';
-import { row, col, coord } from './coord.model';
+import { SquareCount, row, col, coord, Span } from './coord.model';
 import { Tile } from './tile.model';
-import { t, p, s, L } from '@angular/core/src/render3';
-import { start } from 'repl';
-import { assertDataInRangeInternal } from '@angular/core/src/render3/util';
 import { Util } from './util';
 import { Lexicon } from './lexicon.model';
 
@@ -16,10 +13,6 @@ export class Move {
   constructor(private startAt: coord, private letters: string, alignment: placement) {
     this.tiles = Util.wordToTiles(letters);
   }
-}
-
-export class Span {
-  constructor(public start: coord, public end: coord) { }
 }
 
 export class Board {
@@ -53,7 +46,6 @@ export class Board {
     // triple word
     this.tripleWord();
 
-
   }
 
 
@@ -76,93 +68,46 @@ export class Board {
 
   }
 
+  public findRunHorizontal(startAt: coord, endAt : coord) : Span {
+    let slice = new Array<Square>(SquareCount);
 
-  public findHorizontalRun(startAt: coord): Span {
+    let row = startAt.row;
 
-    let startCol  = startAt.col;
-    let leftCol    = startAt.col;
-    let rightCol = startAt.col;
+    for (let c = col._A; c <= col._O; c++)
+      slice[c] = this.board[row][c];
 
-    // if at top, no run
-    if (startCol > col._A) {
-      leftCol = col._A;
-      // check for run above
-      for (let c = startCol - 1; c >= col._A; c--) {
-        if (!this.board[startAt.row][c].IsOccupied()) {
-          leftCol = c + 1;
-          break;
-        }
-      }
-    }
-    // if at bottom, no run
-    if (startCol < col._O) {
-      rightCol = col._O;
-      // check for run below
-      for (let c = startCol + 1; c <= col._O; c++) {
-        if (!this.board[startAt.row][c].IsOccupied()) {
-          rightCol = c - 1;
-          break;
-        }
-      }
-    }
+    let endpoints = Util.generateRun(slice, startAt.col, endAt.col);
 
-    if (leftCol == rightCol)
+    if (endpoints == null)
       return null;
 
-    if ((rightCol != startCol ) && (leftCol != startCol))
-      return new Span(new coord(startAt.row, leftCol), new coord(startAt.row, rightCol));
+    return new Span(new coord(row, endpoints.start), new coord(row, endpoints.end));
+  }
 
-    if (leftCol != startCol)
-      return new Span(new coord(startAt.row, leftCol), new coord(startAt.row, startAt.col));
+  public findRunVertical(startAt: coord, endAt : coord){
+    let slice = new Array<Square>(SquareCount);
 
-    if (rightCol != startCol)
-      return new Span(new coord(startAt.row, startAt.col), new coord(startAt.row, rightCol));
+    let col = startAt.col;
+
+    for (let r = row._1; r <= row._15; r++)
+      slice[r] = this.board[r][col];
+
+    let endpoints = Util.generateRun(slice, startAt.row, endAt.row);
+
+    if (endpoints == null)
+      return null;
+
+    return new Span(new coord(endpoints.start, col), new coord(endpoints.end, col));
 
   }
 
-  public findVerticalRun(startAt: coord): Span {
-
-    let startRow  = startAt.row;
-    let topRow    = startAt.row;
-    let bottomRow = startAt.row;
-
-    // if at top, no run
-    if (startRow > row._1) {
-      topRow = row._1;
-      // check for run above
-      for (let r = startRow - 1; r >= row._1; r--) {
-        if (!this.board[r][startAt.col].IsOccupied()) {
-          topRow = r + 1;
-          break;
-        }
-      }
-    }
-    // if at bottom, no run
-    if (startRow < row._15) {
-      bottomRow = row._15;
-      // check for run below
-      for (let r = startRow + 1; r <= row._15; r++) {
-        if (!this.board[r][startAt.col].IsOccupied()) {
-          bottomRow = r - 1;
-          break;
-        }
-      }
-    }
-
-    if (bottomRow == topRow)
-      return null;
-
-    if ((bottomRow != startRow ) && (topRow != startRow))
-      return new Span(new coord(topRow, startAt.col), new coord(bottomRow, startAt.col));
-
-    if (topRow != startRow)
-      return new Span(new coord(topRow, startAt.col), new coord(startAt.row, startAt.col));
-
-    if (bottomRow != startRow)
-      return new Span(new coord(startAt.row, startAt.col), new coord(bottomRow, startAt.col));
-
+  public findSecondaryRunHorizontal(startAt: coord) : Span {
+    return this.findRunHorizontal(startAt, startAt);
   }
 
+  public findSecondaryRunVertical(startAt: coord) : Span {
+    return this.findRunVertical(startAt, startAt);
+  }
 
   public candidateWords(theMove: Move): Array<string> {
     // generate a list of words created by move
@@ -180,9 +125,7 @@ export class Board {
     return true;
   }
 
-  //public squaresVacant(theMove : Move) : boolean {
-  //  return true;
-  //}
+
   public SquaresVacant?(start: coord, end: coord): boolean {
 
     for (let r: row = start.row; r <= end.row; r++) {
@@ -251,7 +194,7 @@ export class Board {
         tiles.forEach(t => {
           this.board[++row][start.col].place(t);
         })
-        return row ;
+        return row;
         break;
       }
       case placement.horizontal: {

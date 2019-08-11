@@ -1,26 +1,29 @@
 import { Tile } from './tile.model';
-import { T } from '@angular/core/src/render3';
 
 export enum SquareType {
   reg, dl, tl, dw, tw, start
 };
 
 export class Square {
-  private contains: Tile = null;
+  private tile: Tile;
   private type: SquareType = SquareType.reg;
   private isFinal: boolean = false;
-  constructor() { }
+
+  constructor(tile : Tile = null)
+  {
+    this.tile = tile;
+  }
 
   public place(tile: Tile) {
-    this.contains = tile;
+    this.tile = tile;
   }
 
   public IsOccupied() {
-    return this.contains !== null;
+    return this.tile !== null;
   }
 
   public getTile() {
-    return this.contains;
+    return this.tile;
   }
 
   public setType(type : SquareType) {

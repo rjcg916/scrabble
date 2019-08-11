@@ -1,5 +1,4 @@
 import { Tile } from "./tile.model";
-import { t } from "@angular/core/src/render3";
 
 export class Rack {
   private rack: Tile[];
