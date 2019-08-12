@@ -58,17 +58,11 @@ export class Game {
     //   check status
     //       game over
 
-    // Move: proposed move
-    //  are letters in rack?
-    //  proposed placment
-    //  what runs does placement generate
-    //    are all runs valid words?
-    //
-    //  score the move
-    //  remove the tiles from rack
-    //  draw new tiles
 
-    let m = new Move(new coord(row._8, col._H), "at", placement.horizontal);
+ 
+    let p = this.players[this.activePlayer];
+
+    p.Move(this.board, new coord(row._8, col._H), "at", placement.horizontal);
 
    // this.players[this.activePlayer].PlaceTiles(m);
 

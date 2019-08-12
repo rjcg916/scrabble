@@ -56,7 +56,7 @@ describe(' word & tile', () => {
     tiles[0] = new Tile("B", 1);
     tiles[1] = new Tile("O", 1);
     tiles[2] = new Tile("B", 1);
-    let newTiles = Util.wordToTiles("BOB");
+    let newTiles = Util.LettersToTiles("BOB");
     expect(tiles[0].getLetter()).toEqual(newTiles[0].getLetter());
   })
 
@@ -65,7 +65,7 @@ describe(' word & tile', () => {
     tiles[0] = new Tile("B", 1);
     tiles[1] = new Tile("O", 1);
     tiles[2] = new Tile("B", 1);
-    expect(Util.tilesToWord(tiles)).toEqual("BOB");
+    expect(Util.TilesToLetters(tiles)).toEqual("BOB");
   })
 
 

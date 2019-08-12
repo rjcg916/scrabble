@@ -15,7 +15,7 @@ describe('Square', () => {
 
       out = new Square();
 
-      expect(out.IsOccupied()).toEqual(false);
+      expect(out.isOccupied()).toEqual(false);
 
     })
 
@@ -23,9 +23,9 @@ describe('Square', () => {
 
       out = new Square();
 
-      out.place(new Tile("A"));
+      out.Place(new Tile("A"));
 
-      expect(out.IsOccupied()).toEqual(true);
+      expect(out.isOccupied()).toEqual(true);
 
     })
 
@@ -38,7 +38,7 @@ describe('Square', () => {
 
       out = new Square(new Tile("A"));
 
-      expect(out.IsOccupied()).toEqual(true);
+      expect(out.isOccupied()).toEqual(true);
 
     })
 

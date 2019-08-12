@@ -15,7 +15,7 @@ describe('Lexicon', () => {
 
       let out = new Lexicon();
 
-      let found = out.validWord("bob");
+      let found = out.isWordValid("bob");
 
       expect(found).toEqual(true);
 
@@ -25,7 +25,7 @@ describe('Lexicon', () => {
 
       let out = new Lexicon();
 
-      let found = out.validWord("Fred");
+      let found = out.isWordValid("Fred");
 
       expect(found).toEqual(false);
 

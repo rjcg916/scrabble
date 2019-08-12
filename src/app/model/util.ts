@@ -3,18 +3,18 @@ import { Endpoints } from './coord.model';
 import { Square } from './square.model';
 
 export class Util {
-  public static wordToTiles(word: String): Tile[] {
+  public static LettersToTiles(letters: String): Tile[] {
 
     let tiles = new Array<Tile>();
 
-    for (let i: number = 0; i < word.length; i++) {
-      tiles.push(new Tile(word.substr(i, 1)))
+    for (let i: number = 0; i < letters.length; i++) {
+      tiles.push(new Tile(letters.substr(i, 1)))
     }
 
     return tiles;
   }
 
-  public static tilesToWord(tiles: Tile[]): string {
+  public static TilesToLetters(tiles: Tile[]): string {
 
     let aString: string = "";
     tiles.forEach(t => aString = aString.concat(t.getLetter()));

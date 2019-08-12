@@ -11,7 +11,7 @@ export enum placement {
 export class Move {
   private tiles;
   constructor(private startAt: coord, private letters: string, alignment: placement) {
-    this.tiles = Util.wordToTiles(letters);
+    this.tiles = Util.LettersToTiles(letters);
   }
 }
 

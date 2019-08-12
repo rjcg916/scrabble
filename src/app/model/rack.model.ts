@@ -1,4 +1,5 @@
 import { Tile } from "./tile.model";
+import { all } from "q";
 
 export class Rack {
   private rack: Tile[];
@@ -23,10 +24,34 @@ export class Rack {
 
   public RemoveTiles(tilesToRemove: Array<Tile>) {
     tilesToRemove.forEach(t => {
-         let i = this.rack.findIndex( r => r.getLetter() == t.getLetter());
-          if (i > -1)
-              this.rack.splice(i, 1);
+      let i = this.rack.findIndex(r => r.getLetter() == t.getLetter());
+      if (i > -1)
+        this.rack.splice(i, 1);
     })
+  }
+
+  public allTilesInRack?(tiles: Array<Tile>): boolean {
+
+    // need to create copy to handle duplicate letters
+    let copyOfRack = new Array<Tile>();
+    for (let i in this.rack) {
+      copyOfRack[i] = new Tile(this.rack[i].getLetter())
+    }
+
+    // make sure each tile letter found in rack
+    let allLettersFound = true;
+
+    tiles.forEach(t => {
+      let i = copyOfRack.findIndex(r => r.getLetter() == t.getLetter());
+      if (i < 0) {// letter not found
+        allLettersFound = false;
+       return false;
+      } else { // remove letter and keep checking
+        copyOfRack.splice(i, 1)
+      }
+    })
+
+    return allLettersFound;
   }
 
   public getTileCount(): number {
