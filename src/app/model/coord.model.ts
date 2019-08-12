@@ -1,3 +1,5 @@
+import { networkInterfaces } from "os";
+
 export const SquareCount = 15;
 
 export enum row {
@@ -13,10 +15,13 @@ export class coord {
   constructor(public row: row, public col: col) { }
 }
 
-export class Span {
-  constructor(public start: coord, public end: coord) { }
+export interface Span {
+  start : coord;
+  end: coord;
 }
 
-export class Endpoints {
-  constructor(public start: number, public end: number) { }
+export interface Endpoints {
+  start: number;
+  end : number;
 }
+

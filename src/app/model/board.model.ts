@@ -3,17 +3,9 @@ import { SquareCount, row, col, coord, Span } from './coord.model';
 import { Tile } from './tile.model';
 import { Util } from './util';
 import { Lexicon } from './lexicon.model';
+import { Move, placement } from './move.model';
 
-export enum placement {
-  horizontal, vertical, invalid
-}
 
-export class Move {
-  private tiles;
-  constructor(private startAt: coord, private letters: string, alignment: placement) {
-    this.tiles = Util.LettersToTiles(letters);
-  }
-}
 
 export class Board {
   private board: Square[][];
@@ -68,46 +60,47 @@ export class Board {
 
   }
 
-  public findRunHorizontal(startAt: coord, endAt : coord) : Span {
-    let slice = new Array<Square>(SquareCount);
+  // public findRunHorizontal(start: coord, end: coord): Span {
+  //   let slice = new Array<Square>(SquareCount);
+  //
+  //    let row = start.row;
+  //
+  //    for (let c = col._A; c <= col._O; c++)
+  //      slice[c] = this.board[row][c];
+  //
+  //    let endpoints = Util.generateRun(slice, start.col, end.col);
+  //
+  //    if (endpoints == null)
+  //      return null;
+  //
+  //    return { start: { row: row, col: endpoints.start },
+  //             end: { row: row, col: endpoints.end } };
+  //  }
 
-    let row = startAt.row;
+  //  public findRunVertical(start: coord, end: coord) {
+  //    let slice = new Array<Square>(SquareCount);
+  //
+  //    let col = start.col;
+  //
+  //    for (let r = row._1; r <= row._15; r++)
+  //      slice[r] = this.board[r][col];
+  //
+  //    let endpoints = Util.generateRun(slice, start.row, end.row);
+  //
+  //    if (endpoints == null)
+  //      return null;
+  //
+  //    return { start: { row: endpoints.start, col: col },
+  //             end: { row: endpoints.end, col: col } };
+  //  }
 
-    for (let c = col._A; c <= col._O; c++)
-      slice[c] = this.board[row][c];
+  //  public findSecondaryRunHorizontal(start: coord): Span {
+  //    return this.findRunHorizontal(start, start);
+  //  }
 
-    let endpoints = Util.generateRun(slice, startAt.col, endAt.col);
-
-    if (endpoints == null)
-      return null;
-
-    return new Span(new coord(row, endpoints.start), new coord(row, endpoints.end));
-  }
-
-  public findRunVertical(startAt: coord, endAt : coord){
-    let slice = new Array<Square>(SquareCount);
-
-    let col = startAt.col;
-
-    for (let r = row._1; r <= row._15; r++)
-      slice[r] = this.board[r][col];
-
-    let endpoints = Util.generateRun(slice, startAt.row, endAt.row);
-
-    if (endpoints == null)
-      return null;
-
-    return new Span(new coord(endpoints.start, col), new coord(endpoints.end, col));
-
-  }
-
-  public findSecondaryRunHorizontal(startAt: coord) : Span {
-    return this.findRunHorizontal(startAt, startAt);
-  }
-
-  public findSecondaryRunVertical(startAt: coord) : Span {
-    return this.findRunVertical(startAt, startAt);
-  }
+  //  public findSecondaryRunVertical(start: coord): Span {
+  //    return this.findRunVertical(start, start);
+  //  }
 
   public candidateWords(theMove: Move): Array<string> {
     // generate a list of words created by move
@@ -186,31 +179,48 @@ export class Board {
 
   }
 
-  public PlaceTiles(start: coord, tiles: Array<Tile>, tilePlacement: placement): number {
-    // return last index
-    switch (+tilePlacement) {
-      case placement.vertical: {
-        let row = start.row - 1;
-        tiles.forEach(t => {
-          this.board[++row][start.col].Place(t);
-        })
-        return row;
-        break;
-      }
-      case placement.horizontal: {
-        let col = start.col - 1;
-        tiles.forEach(t => {
-          this.board[start.row][++col].Place(t);
-        })
-        return col;
-        break;
-      }
-      case placement.invalid: {
-        return 0;
-        break;
-      }
-    }
+  public PlaceTilesVertical(start: coord, tiles: Array<Tile>): number {
+    let row = start.row - 1;
+    tiles.forEach(t => {
+      this.board[++row][start.col].Place(t);
+    })
+    return row;
   }
+
+
+  public PlaceTilesHorizontal(start: coord, tiles: Array<Tile>): number {
+    let col = start.col - 1;
+    tiles.forEach(t => {
+      this.board[start.row][++col].Place(t);
+    })
+    return col;
+  }
+
+ // public PlaceTiles(start: coord, tiles: Array<Tile>, tilePlacement: placement): number {
+ //   // return last index
+ //   switch (+tilePlacement) {
+ //     case placement.vertical: {
+ //       let row = start.row - 1;
+ //       tiles.forEach(t => {
+//        this.board[++row][start.col].Place(t);
+//        })
+//        return row;
+//        break;
+//      }
+//      case placement.horizontal: {
+//        let col = start.col - 1;
+//        tiles.forEach(t => {
+//          this.board[start.row][++col].Place(t);
+//        })
+//        return col;
+//        break;
+//      }
+//      case placement.invalid: {
+//        return 0;
+//        break;
+//      }
+//    }
+//  }
 
   public getOccupiedCount(): number {
     let count: number = 0;

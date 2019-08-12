@@ -56,7 +56,6 @@ export class Util {
       return null;
 
 
-    return new Endpoints(firstSquare, lastSquare)
-
+    return {start: firstSquare, end: lastSquare}
   }
 }
