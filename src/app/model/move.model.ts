@@ -1,7 +1,6 @@
 import { Util } from './util';
-import { coord, col, row, SquareCount, Span } from './coord.model';
+import { coord, Span } from './coord.model';
 import { Board } from './board.model';
-import { Square } from './square.model';
 
 export enum placement {
   horizontal, vertical, invalid
@@ -16,6 +15,8 @@ interface IMove {
 export abstract class Move {
   protected tiles;
   protected length: number;
+  public startCoord: coord;
+  public endCoord: coord;
   constructor(protected board: Board, private start: coord, private letters: string) {
     this.tiles = Util.LettersToTiles(letters);
     this.length = letters.length;
@@ -23,23 +24,45 @@ export abstract class Move {
 }
 
 export class HorizontalMove extends Move implements IMove {
-  private startCoord: coord;
-  private endCoord: coord;
+  //  public startCoord: coord;
+  //  public endCoord: coord;
   constructor(board: Board, start: coord, letters: string) {
     super(board, start, letters);
     this.startCoord = start;
     this.endCoord = new coord(this.startCoord.row, this.startCoord.col + this.length);
   }
 
-  public findParallelRun(): Span {
-    return Util.findHorizontalRun(this.board, this.startCoord, this.endCoord);
 
-    // replace
+  // public EndForMove(count: number, orientation: placement): coord {
+  //   let end: coord;
+  //   if (orientation == placement.horizontal) {
+  //     end = new coord(this.row, this.col + count);
+  //   } else if (orientation == placement.vertical) {
+  //     end = new coord(this.row + count, this.col)
+  //   }
+  //   return end;
+  // }
+
+  public findParallelRun(): Span {
+    //  return Util.findHorizontalRun(this.board, this.startCoord, this.endCoord);
+
+    let slice = this.board.getHorizontalSlice(this.startCoord.row);
+
+    let endpoints = Util.generateRun(slice, this.startCoord.col, this.endCoord.col);
+
+    if (endpoints == null)
+      return null;
+
+    return {
+      start: { row: this.startCoord.row, col: endpoints.start },
+      end: { row: this.startCoord.row, col: endpoints.end }
+    };
+
   }
 
   public findPerpendicularRun(aSquare: coord): Span {
 
-    let slice = Util.getVerticalSlice(this.board, aSquare);
+    let slice = this.board.getVerticalSlice(aSquare.col);
 
     let endpoints = Util.generateRun(slice, aSquare.row, aSquare.row);
 
@@ -51,7 +74,7 @@ export class HorizontalMove extends Move implements IMove {
       end: { row: endpoints.end, col: aSquare.col }
     };
 
- //   return Util.findVerticalRun(this.board, aSquare, aSquare);
+    //   return Util.findVerticalRun(this.board, aSquare, aSquare);
 
 
   }
@@ -68,34 +91,56 @@ export class HorizontalMove extends Move implements IMove {
 }
 
 export class VerticalMove extends Move implements IMove {
-  private startCoord: coord;
-  private endCoord: coord;
+  //  private startCoord: coord;
+  //  public endCoord: coord;
   constructor(board: Board, start: coord, letters: string) {
     super(board, start, letters);
     this.startCoord = start;
     this.endCoord = new coord(this.startCoord.row + this.length, this.startCoord.col);
   }
+
+  // public EndForMove(count: number, orientation: placement): coord {
+  //   let end: coord;
+  //   if (orientation == placement.horizontal) {
+  //     end = new coord(this.row, this.col + count);
+  //   } else if (orientation == placement.vertical) {
+  //     end = new coord(this.row + count, this.col)
+  //   }
+  //   return end;
+  // }
   public findParallelRun(): Span {
 
-    return Util.findVerticalRun(this.board, this.startCoord, this.endCoord);
+    // return Util.findVerticalRun(this.board, this.startCoord, this.endCoord);
 
+    let slice = this.board.getVerticalSlice(this.startCoord.col);
+
+    let endpoints = Util.generateRun(slice, this.startCoord.row, this.endCoord.row);
+
+    if (endpoints == null)
+      return null;
+
+    return {
+      start: { row: endpoints.start, col: this.startCoord.col },
+      end: { row: endpoints.end, col: this.startCoord.col }
+    };
     // replace
   }
 
   public findPerpendicularRun(aSquare: coord): Span {
 
-      let slice = Util.getHorizontalSlice(this.board, aSquare);
-      let endpoints = Util.generateRun(slice, aSquare.col, aSquare.col);
+    let slice = this.board.getHorizontalSlice(aSquare.row);
 
-      if (endpoints == null)
-        return null;
+    let endpoints = Util.generateRun(slice, aSquare.col, aSquare.col);
 
-      return {
-        start: { row : aSquare.row, col: endpoints.start },
-        end: { row: aSquare.row, col: endpoints.end }
-      };
+    if (endpoints == null)
+      return null;
 
-      //   return Util.findHorizontalRun(this.board, aSquare, aSquare);
+    return {
+      start: { row: aSquare.row, col: endpoints.start },
+      end: { row: aSquare.row, col: endpoints.end }
+    };
+
+    //   return Util.findHorizontalRun(this.board, aSquare, aSquare);
   }
 
   public findAllPerpendicularRuns(): Array<Span> {

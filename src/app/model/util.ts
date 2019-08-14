@@ -59,67 +59,67 @@ export class Util {
 
     return {start: firstSquare, end: lastSquare}
   }
+//  static getVerticalSlice(board : Board, col : col) : Array<Square>
+//  {
+//    let slice = new Array<Square>(SquareCount);
+//
+//    let col = start.col;
+//
+//    for (let r = row._1; r <= row._15; r++)
+//      slice[r] = board[r][col];
+//
+//    return slice;
+//  }
 
-  static getVerticalSlice(board : Board, start: coord) : Array<Square>
-  {
-    let slice = new Array<Square>(SquareCount);
 
-    let col = start.col;
+ // static findVerticalRun(board : Board, start: coord, end: coord): Span {
+ //   let slice = new Array<Square>(SquareCount);
+//
+//    let col = start.col;
+//
+//    for (let r = row._1; r <= row._15; r++)
+//      slice[r] = board[r][col];
+//
+//    let endpoints = Util.generateRun(slice, start.row, end.row);
+//
+//    if (endpoints == null)
+ //     return null;
+//
+//    return {
+//      start: { row: endpoints.start, col: col },
+//      end: { row: endpoints.end, col: col }
+//    };
+//  }
 
-    for (let r = row._1; r <= row._15; r++)
-      slice[r] = board[r][col];
 
-    return slice;
-  }
+//  static getHorizontalSlice(board: Board, row: row) : Array<Square>
+//  {
+//    let slice = new Array<Square>(SquareCount);
+//
+  //  let row = start.row;
+//
+//    for (let c = col._A; c <= col._O; c++)
+//      slice[c] = board[row][c];
+//
+//    return slice;
+//  }
 
-
-  static findVerticalRun(board : Board, start: coord, end: coord): Span {
-    let slice = new Array<Square>(SquareCount);
-
-    let col = start.col;
-
-    for (let r = row._1; r <= row._15; r++)
-      slice[r] = board[r][col];
-
-    let endpoints = Util.generateRun(slice, start.row, end.row);
-
-    if (endpoints == null)
-      return null;
-
-    return {
-      start: { row: endpoints.start, col: col },
-      end: { row: endpoints.end, col: col }
-    };
-  }
-
-  static getHorizontalSlice(board: Board, start: coord) : Array<Square>
-  {
-    let slice = new Array<Square>(SquareCount);
-
-    let row = start.row;
-
-    for (let c = col._A; c <= col._O; c++)
-      slice[c] = board[row][c];
-
-    return slice;
-  }
-
-  static findHorizontalRun(board: Board, start: coord, end: coord): Span {
-    let slice = new Array<Square>(SquareCount);
-
-    let row = start.row;
-
-    for (let c = col._A; c <= col._O; c++)
-      slice[c] = board[row][c];
-
-    let endpoints = Util.generateRun(slice, start.col, end.col);
-
-    if (endpoints == null)
-      return null;
-
-    return {
-        start: { row: row, col: endpoints.start },
-      end: { row: row, col: endpoints.end }
-    };
-  }
+ // static findHorizontalRun(board: Board, start: coord, end: coord): Span {
+ //   let slice = new Array<Square>(SquareCount);
+//
+//    let row = start.row;
+//
+//    for (let c = col._A; c <= col._O; c++)
+ //     slice[c] = board[row][c];
+//
+//    let endpoints = Util.generateRun(slice, start.col, end.col);
+//
+//    if (endpoints == null)
+//      return null;
+//
+//    return {
+//        start: { row: row, col: endpoints.start },
+//      end: { row: row, col: endpoints.end }
+//    };
+//  
 }

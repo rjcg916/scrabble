@@ -1,9 +1,10 @@
-import { Board, placement, Move } from './board.model';
+import { Board } from './board.model';
 import { coord, row, col } from './coord.model';
 import { Player } from './player.model';
 import { Lexicon } from './lexicon.model';
 import { Tile } from './tile.model';
 import { TileBagService } from '../service/tile-bag.service';
+import { placement } from './move.model';
 
 export class Game {
 
@@ -59,7 +60,7 @@ export class Game {
     //       game over
 
 
- 
+
     let p = this.players[this.activePlayer];
 
     p.Move(this.board, new coord(row._8, col._H), "at", placement.horizontal);

@@ -1,7 +1,6 @@
 import { Square, SquareType } from './square.model';
 import { SquareCount, row, col, coord, Span } from './coord.model';
 import { Tile } from './tile.model';
-import { Util } from './util';
 import { Lexicon } from './lexicon.model';
 import { Move, placement } from './move.model';
 
@@ -38,6 +37,30 @@ export class Board {
     // triple word
     this.tripleWord();
 
+  }
+
+  public getHorizontalSlice(row: row) : Array<Square>
+  {
+    let slice = new Array<Square>(SquareCount);
+
+  //  let row = start.row;
+
+    for (let c = col._A; c <= col._O; c++)
+      slice[c] = this.board[row][c];
+
+    return slice;
+  }
+
+  public getVerticalSlice(col : col) : Array<Square>
+  {
+    let slice = new Array<Square>(SquareCount);
+
+//    let col = start.col;
+
+    for (let r = row._1; r <= row._15; r++)
+      slice[r] = this.board[r][col];
+
+    return slice;
   }
 
 

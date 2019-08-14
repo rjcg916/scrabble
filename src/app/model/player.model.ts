@@ -1,6 +1,7 @@
 import { Rack } from './rack.model';
 import { Tile } from './tile.model';
-import { Board, Move, placement } from './board.model';
+import { Board } from './board.model';
+import { Move, placement, HorizontalMove, VerticalMove } from './move.model';
 import { coord } from './coord.model';
 import { Util } from './util';
 
@@ -21,15 +22,15 @@ export class Player {
     return this.rack.FillWithTiles(availableTiles);
   }
 
-  private EndForMove(start: coord, count: number, orientation: placement): coord {
-    let end: coord;
-    if (orientation == placement.horizontal) {
-      end = new coord(start.row, start.col + count);
-    } else if (orientation == placement.vertical) {
-      end = new coord(start.row + count, start.col)
-    }
-    return end;
-  }
+  // private EndForMove(start: coord, count: number, orientation: placement): coord {
+  //   let end: coord;
+  //   if (orientation == placement.horizontal) {
+  //     end = new coord(start.row, start.col + count);
+  //   } else if (orientation == placement.vertical) {
+  //     end = new coord(start.row + count, start.col)
+  //   }
+  //   return end;
+  // }
 
   public Move(theBoard: Board, start: coord, letters: string, orientation: placement): MoveResult {
 
@@ -50,27 +51,36 @@ export class Player {
     if (!allTilesInRack)
       throw new Error('Specified tiles not in Rack.');
 
-    let end = this.EndForMove(start, letters.length, orientation);
 
-    let squaresVacant = theBoard.squaresVacant(start, end)
+      let squaresVacant : boolean;
+       
+    switch (orientation) {
+      case placement.horizontal: {
+        let move = new HorizontalMove(theBoard, start, letters);
+
+        //   let horizontalSpan = theBoard.findRunHorizontal(start, end)
+        // for all cols,
+        //  theBoard.findSecondaryRunVertical()
+        squaresVacant = theBoard.squaresVacant(start, move.endCoord);
+        break;
+      }
+      case placement.vertical: {
+        let move = new VerticalMove(theBoard, start, letters);
+        //        let verticalSpan = theBoard.findRunVertical(start, end)
+        // for all rows
+        //        theBoard.findSecondaryRunHorizontal()
+
+        // let end = this.EndForMove(start, letters.length, orientation);
+        squaresVacant = theBoard.squaresVacant(start, move.endCoord );
+        break;
+      }
+    }
     if (!squaresVacant)
       throw new Error('Specified squares not vacant');
 
-     switch (orientation) {
-      case placement.horizontal : {
-        let horizontalSpan = theBoard.findRunHorizontal(start, end)
-        // for all cols,
-        theBoard.findSecondaryRunVertical()
-      }
-      case placement.vertical : {
-        let verticalSpan = theBoard.findRunVertical(start, end)
-        // for all rows
-        theBoard.findSecondaryRunHorizontal()
-      }
 
-    }
 
-     return { isValid: true, errorMessages: Array<string>(), score: 50 };
+    return { isValid: true, errorMessages: Array<string>(), score: 50 };
 
   }
 
