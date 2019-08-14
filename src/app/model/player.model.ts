@@ -52,8 +52,8 @@ export class Player {
       throw new Error('Specified tiles not in Rack.');
 
 
-      let squaresVacant : boolean;
-       
+    let squaresVacant: boolean;
+
     switch (orientation) {
       case placement.horizontal: {
         let move = new HorizontalMove(theBoard, start, letters);
@@ -61,7 +61,7 @@ export class Player {
         //   let horizontalSpan = theBoard.findRunHorizontal(start, end)
         // for all cols,
         //  theBoard.findSecondaryRunVertical()
-        squaresVacant = theBoard.squaresVacant(start, move.endCoord);
+        squaresVacant = theBoard.squaresVacant(start, move.getEndCoord());
         break;
       }
       case placement.vertical: {
@@ -71,7 +71,7 @@ export class Player {
         //        theBoard.findSecondaryRunHorizontal()
 
         // let end = this.EndForMove(start, letters.length, orientation);
-        squaresVacant = theBoard.squaresVacant(start, move.endCoord );
+        squaresVacant = theBoard.squaresVacant(start, move.getEndCoord());
         break;
       }
     }

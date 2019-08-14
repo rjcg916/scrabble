@@ -15,8 +15,8 @@ interface IMove {
 export abstract class Move {
   protected tiles;
   protected length: number;
-  public startCoord: coord;
-  public endCoord: coord;
+  protected startCoord: coord;
+  protected endCoord: coord;
   constructor(protected board: Board, private start: coord, private letters: string) {
     this.tiles = Util.LettersToTiles(letters);
     this.length = letters.length;
@@ -24,14 +24,14 @@ export abstract class Move {
 }
 
 export class HorizontalMove extends Move implements IMove {
-  //  public startCoord: coord;
-  //  public endCoord: coord;
   constructor(board: Board, start: coord, letters: string) {
     super(board, start, letters);
     this.startCoord = start;
     this.endCoord = new coord(this.startCoord.row, this.startCoord.col + this.length);
   }
 
+  public getEndCoord() : coord
+  { return this.endCoord}
 
   // public EndForMove(count: number, orientation: placement): coord {
   //   let end: coord;
@@ -91,14 +91,14 @@ export class HorizontalMove extends Move implements IMove {
 }
 
 export class VerticalMove extends Move implements IMove {
-  //  private startCoord: coord;
-  //  public endCoord: coord;
   constructor(board: Board, start: coord, letters: string) {
     super(board, start, letters);
     this.startCoord = start;
     this.endCoord = new coord(this.startCoord.row + this.length, this.startCoord.col);
   }
-
+  public getEndCoord() : coord
+  { return this.endCoord}
+  
   // public EndForMove(count: number, orientation: placement): coord {
   //   let end: coord;
   //   if (orientation == placement.horizontal) {
