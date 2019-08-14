@@ -32,7 +32,7 @@ describe('Move', () => {
 //     let span = out.findSecondaryRunVertical(new coord(row._11, col._H));
 
      let move = new VerticalMove(board, new coord(row._11, col._H), "abc");
-     let span = move.findSecondaryRun(new coord(row._11, col._H));
+     let span = move.findPerpendicularRun(new coord(row._11, col._H));
 
     expect(span.start.row).toEqual(row._8);
     expect(span.end.row).toEqual(row._11);
@@ -51,7 +51,7 @@ describe('Move', () => {
     //let span = out.findVerticalRun(new coord(row._12, col._H));
     //let span = out.findSecondaryRunVertical(new coord(row._12, col._H));
     let move = new VerticalMove(board, new coord(row._12, col._H), "abc");
-    let span = move.findSecondaryRun(start);
+    let span = move.findPerpendicularRun(start);
 
     expect(span).toBeNull();
 
@@ -74,8 +74,8 @@ describe('Move', () => {
     board.PlaceTilesVertical(start2, [tileA, tileB, tileC]);
 
     //let span = out.findVerticalRun(new coord(row._12, col._H));
-    let move = new HorizontalMove(board, new coord(), "abc");
-    let span = move.findSecondaryRun(new coord(row._12, col._H));
+    let move = new HorizontalMove(board, new coord(1,1), "abc");
+    let span = move.findPerpendicularRun(new coord(row._12, col._H));
 
     expect(span.start.row).toEqual(row._9);
     expect(span.end.row).toEqual(row._15);
@@ -100,11 +100,12 @@ describe('Move', () => {
 
       //let span = out.findHorizontalRun(new coord(row._9, col._F));
       //let span = out.findSecondaryRunHorizontal(new coord(row._9, col._F));
-      let move = new VerticalMove(board, new coord(), "abc");
-      let span;
+      let move = new VerticalMove(board, new coord(1,1), "abc");
+      let span1 = move.findPerpendicularRun( new coord(1,1));
+      let span2 = move.findParallelRun()
 
-      expect(span.start.col).toEqual(col._C);
-      expect(span.end.col).toEqual(col._I);
+      expect(span1.start.col).toEqual(col._C);
+      expect(span1.end.col).toEqual(col._I);
     })
 
   })
