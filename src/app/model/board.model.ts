@@ -162,13 +162,11 @@ export class Board {
 
     let currentRow: number = start.row;
     let maxRow : number = row._15;
-    let remainingCount = tiles.length;
     let currentTile = 0;
 
     do {
        this.board[currentRow++][start.col].Place(tiles[currentTile++]);
-       remainingCount--;
-    } while((currentRow <= maxRow) && (remainingCount > 0))
+    } while((currentRow <= maxRow) && (currentTile < tiles.length))
 
     return currentRow - 1;
   }
@@ -178,13 +176,11 @@ export class Board {
 
     let currentCol: number = start.col;
     let maxCol : number = col._O;
-    let remainingCount = tiles.length;
     let currentTile = 0;
 
     do {
        this.board[start.row][currentCol++].Place(tiles[currentTile++]);
-       remainingCount--;
-    } while((currentCol <= maxCol) && (remainingCount > 0))
+    } while((currentCol <= maxCol) && (currentTile < tiles.length))
 
     return currentCol - 1;
 
