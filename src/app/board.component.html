@@ -1,0 +1,6 @@
+<div>This is the board component</div>
+<table class="table table-sm table-bordered mt-1 text-dark">
+ <tr *ngFor="let row of getRows()">
+   <td *ngFor="let col of row.getCols()">{{col.rowIndex}},{{col.colIndex}}</td>
+</tr>
+</table>

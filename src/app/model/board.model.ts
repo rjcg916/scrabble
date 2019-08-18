@@ -40,6 +40,38 @@ export class Board {
 
   }
 
+  public numberOfRows(): number {
+    return this.board.length;
+  }
+
+  public lastRow(): row {
+    return row._15;
+  }
+
+  public numberOfColumns(): number {
+    return this.board[0].length;
+  }
+
+  public lastCol(): col {
+    return col._O;
+  }
+
+  public getCols(row: number) {
+    let cols = [];
+    for (let c = 0; c < this.board[0].length; c++) {
+      cols.concat(this.board[row][c])
+    }
+    return cols;
+  }
+
+  public getRows() {
+    let rows = []
+    for (let r = 0; r < this.board.length; r++) {
+      rows.concat(this.board[r]);
+    }
+    return rows;
+  }
+
   // return all the squares in a specified row
   public getHorizontalSlice(row: row): Array<Square> {
     let slice = new Array<Square>(SquareCount);
@@ -161,12 +193,12 @@ export class Board {
   public PlaceTilesVertical(start: coord, tiles: Array<Tile>): row {
 
     let currentRow: number = start.row;
-    let maxRow : number = row._15;
+    let maxRow: number = row._15;
     let currentTile = 0;
 
     do {
-       this.board[currentRow++][start.col].Place(tiles[currentTile++]);
-    } while((currentRow <= maxRow) && (currentTile < tiles.length))
+      this.board[currentRow++][start.col].Place(tiles[currentTile++]);
+    } while ((currentRow <= maxRow) && (currentTile < tiles.length))
 
     return currentRow - 1;
   }
@@ -175,12 +207,12 @@ export class Board {
   public PlaceTilesHorizontal(start: coord, tiles: Array<Tile>): col {
 
     let currentCol: number = start.col;
-    let maxCol : number = col._O;
+    let maxCol: number = col._O;
     let currentTile = 0;
 
     do {
-       this.board[start.row][currentCol++].Place(tiles[currentTile++]);
-    } while((currentCol <= maxCol) && (currentTile < tiles.length))
+      this.board[start.row][currentCol++].Place(tiles[currentTile++]);
+    } while ((currentCol <= maxCol) && (currentTile < tiles.length))
 
     return currentCol - 1;
 
