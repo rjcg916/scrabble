@@ -1,15 +1,20 @@
-import { Directive, ElementRef, Attribute, Input, SimpleChange } from '@angular/core';
-
+import { Directive, ElementRef, Attribute, Input, SimpleChange, EventEmitter, Output } from '@angular/core';
+import { Square } from './model/square.model';
+import {Tile} from './model/tile.model';
+import {Col} from './model/boardv2.model';
 
 @Directive({
-  selector: "[square]"
+  selector: "[square-attr]"
 })
 export class SquareDirective {
 
-  constructor(private element: ElementRef) { }
+  constructor(private element: ElementRef) {
 
-  @Input("square")
+  }
+
+ @Input("square-attr")
   bgClass: string;
+
 
   ngOnInit() {
     this.element.nativeElement.classList.add(this.bgClass || "bg-success", "text-white")

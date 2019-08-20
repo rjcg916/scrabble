@@ -1,6 +1,10 @@
 <div>This is the board component</div>
+<div>Selected Square {{selectedRow || '(None)'}},{{selectedCol || '(None)'}}</div>
 <table class="table table-sm table-bordered mt-1 text-dark">
- <tr *ngFor="let row of getRows()">
-   <td *ngFor="let col of row.getCols()" [square]>{{col.rowIndex}},{{col.colIndex}}</td>
+ <tr *ngFor="let row of getRows();">
+   <td  *ngFor="let col of row.getCols();" [square-attr]
+         (mouseover)="selectedRow=col.rowIndex.toString()"
+         (mouseover)="selectedCol=col.colIndex.toString()" >
+        {{col.rowIndex}},{{col.colIndex}}</td>
 </tr>
 </table>

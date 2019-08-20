@@ -5,7 +5,7 @@ export enum SquareType {
 };
 
 export class Square {
-  private tile: Tile;
+  public tile: Tile;
   private type: SquareType = SquareType.reg;
   private isFinal: boolean = false;
 
