@@ -1,4 +1,4 @@
-import { Board } from './board.model';
+import { Board } from './boardv1.model';
 import { coord, row, col } from './coord.model';
 import { Player } from './player.model';
 import { Lexicon } from './lexicon.model';
@@ -40,17 +40,17 @@ export class Game {
 
 
 
-  public getName(): string {
+  getName(): string {
     return this.name;
   }
 
 
-  public getTileBagCount() {
+  getTileBagCount() {
     return this.tileBag.length;
   }
 
 
-  public play() {
+  play() {
 
 
     // for  each player

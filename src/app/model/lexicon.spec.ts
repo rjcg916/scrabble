@@ -10,7 +10,6 @@ describe('Lexicon', () => {
   describe('check words', () => {
 
 
-
     it('find in lexicon', () => {
 
       let out = new Lexicon();

@@ -1,7 +1,7 @@
 import { Directive, ElementRef, Attribute, Input, SimpleChange, EventEmitter, Output } from '@angular/core';
 import { Square } from './model/square.model';
 import {Tile} from './model/tile.model';
-import {Col} from './model/boardv2.model';
+import {Col} from './model/board.model';
 
 @Directive({
   selector: "[square-attr]"

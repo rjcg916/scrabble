@@ -1,0 +1,9 @@
+<div>This is a rack</div>
+<div>Current selection </div>
+<table class="table table-sm table-bordered mt-1 text-dark">
+  <tr>
+  <td  *ngFor="let tile of getTiles();" [square-attr]
+          (click)="selectedTile=tile" >
+         {{tile.letter}} {{tile.value}}</td>
+ </tr>
+ </table>

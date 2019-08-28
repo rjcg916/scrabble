@@ -5,11 +5,12 @@ import { NgModule } from '@angular/core';
 import {GameComponent} from './component';
 import {BoardComponent} from './board.component';
 import {PlayerComponent} from './player.component'
+import {RackComponent} from './rack.component';
 import {SquareDirective} from './square.directive';
 
 @NgModule({
   declarations: [
-    [GameComponent, BoardComponent, PlayerComponent, SquareDirective]
+    GameComponent, BoardComponent, PlayerComponent, SquareDirective, RackComponent
   ],
   imports: [
     BrowserModule

@@ -1,7 +1,7 @@
 import { Tile } from './tile.model';
 import { Endpoints, coord, Span, SquareCount, row, col } from './coord.model';
 import { Square  } from './square.model';
-import { Board } from './board.model';
+import { Board } from './boardv1.model';
 
 export class Util {
   public static LettersToTiles(letters: String): Tile[] {
@@ -15,19 +15,19 @@ export class Util {
     return tiles;
   }
 
-  public static TilesToLetters(tiles: Tile[]): string {
+  static TilesToLetters(tiles: Tile[]): string {
 
     let aString: string = "";
-    tiles.forEach(t => aString = aString.concat(t.getLetter()));
+    tiles.forEach(t => aString = aString.concat(t.letter));
     return aString;
 
   }
 
-  public static generateSecondaryRun(slice : Array<Square>, square : number) : Endpoints{
+  static generateSecondaryRun(slice : Array<Square>, square : number) : Endpoints{
     return this.generateRun(slice, square, square)
   }
 
-  public static generateRun(slice: Array<Square>, startSquare: number, endSquare: number): Endpoints {
+  static generateRun(slice: Array<Square>, startSquare: number, endSquare: number): Endpoints {
     // number/input is index
     let firstSquare = startSquare;
 
@@ -121,5 +121,5 @@ export class Util {
 //        start: { row: row, col: endpoints.start },
 //      end: { row: row, col: endpoints.end }
 //    };
-//  
+//
 }

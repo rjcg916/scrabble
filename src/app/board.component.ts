@@ -1,8 +1,7 @@
 import { Component } from '@angular/core'
-import { Board, Row, Col } from './model/boardv2.model';
-import { row, col } from './model/coord.model';
-import { Square } from './model/square.model';
-import { s } from '@angular/core/src/render3';
+import { Board, Row} from './model/board.model';
+import { coord } from './model/coord.model';
+import {Square} from './model/square.model';
 
 @Component({
   selector: "board",
@@ -11,14 +10,24 @@ import { s } from '@angular/core/src/render3';
 
 export class BoardComponent {
 
-  private board : Board;
-  message : string;
+  private _board : Board;
+  selectedCell : coord;
   constructor() {
-    this.board = new Board();
+    this._board = new Board();
   }
 
-  public getRows() : Array<Row> {
-    return this.board.getRows();
+  get rows() : Array<Row> {
+    return this._board.rows;
   }
+
+  public GetSquare(rowIndex : number, colIndex : number) : Square {
+     let rows = this.rows;
+     let row = rows[rowIndex];
+     let cols = row.cols;
+     let col = cols[colIndex];
+     return col.square;
+
+  }
+
 }
 

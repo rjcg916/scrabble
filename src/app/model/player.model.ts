@@ -1,6 +1,6 @@
 import { Rack } from './rack.model';
 import { Tile } from './tile.model';
-import { Board } from './board.model';
+import { Board } from './boardv1.model';
 import { Move, placement, HorizontalMove, VerticalMove } from './move.model';
 import { coord } from './coord.model';
 import { Util } from './util';
@@ -13,13 +13,17 @@ interface MoveResult {
 }
 
 export class Player {
-  private rack: Rack;
-  constructor(public name?: string) {
-    this.rack = new Rack();
+  private _rack: Rack;
+  constructor(private _name?: string) {
+    this._rack = new Rack();
   }
 
-  public DrawTiles(availableTiles: Array<Tile>): Array<Tile> {
-    return this.rack.FillWithTiles(availableTiles);
+  get name() {
+    return this._name;
+  }
+
+  DrawTiles(tiles: Array<Tile>): Array<Tile> {
+    return this._rack.AddTiles(tiles);
   }
 
   // private EndForMove(start: coord, count: number, orientation: placement): coord {
@@ -32,7 +36,7 @@ export class Player {
   //   return end;
   // }
 
-  public Move(theBoard: Board, start: coord, letters: string, orientation: placement): MoveResult {
+  Move(theBoard: Board, start: coord, letters: string, orientation: placement): MoveResult {
 
     // Move: proposed move
     //  are letters in rack?
@@ -47,7 +51,7 @@ export class Player {
 
     let tiles = Util.LettersToTiles(letters);
 
-    let allTilesInRack = this.rack.allTilesInRack(tiles);
+    let allTilesInRack = this._rack.allTilesInRack(tiles);
     if (!allTilesInRack)
       throw new Error('Specified tiles not in Rack.');
 
@@ -84,7 +88,7 @@ export class Player {
 
   }
 
-  public PlaceTiles(move: Move) {
+  PlaceTiles(move: Move) {
     //place tiles
 
   }

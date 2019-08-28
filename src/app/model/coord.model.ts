@@ -1,5 +1,5 @@
 import { networkInterfaces } from "os";
-import {placement} from './move.model';
+import { placement} from './move.model';
 
 export const SquareCount = 15;
 
@@ -14,9 +14,17 @@ export enum col {
 
 export class coord {
 
-  constructor(public row: row, public col: col) { }
+  constructor(private _row: row, private _col: col) { }
 
- // public EndForMove(count: number, orientation: placement): coord {
+  get row() : row {
+    return this._row;
+  }
+
+  get col() : col {
+    return this._col;
+  }
+
+  // public EndForMove(count: number, orientation: placement): coord {
  //   let end: coord;
  //   if (orientation == placement.horizontal) {
  //     end = new coord(this.row, this.col + count);

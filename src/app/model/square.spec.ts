@@ -1,4 +1,4 @@
-import {Square} from './square.model';
+import {Square, SquareType} from './square.model';
 
 import { Tile } from './tile.model';
 
@@ -23,24 +23,66 @@ describe('Square', () => {
 
       out = new Square();
 
-      out.Place(new Tile("A"));
+      let aTile = new Tile("c");
+
+      out.tile = aTile;
 
       expect(out.isOccupied()).toEqual(true);
 
     })
 
-  })
+    it('default type', () => {
 
-  describe('constructor ', () => {
+      out = new Square();
+
+      expect(out.type).toEqual(SquareType.reg);
+
+    })
 
 
-    it('occupied square', () => {
+    it('explicitly set type', () => {
 
-      out = new Square(new Tile("A"));
+      out = new Square();
+      out.type = SquareType.tl;
 
-      expect(out.isOccupied()).toEqual(true);
+      expect(out.type).toEqual(SquareType.tl);
+
+    })
+
+
+    it('explicit letter multiplier', () => {
+
+      out = new Square();
+      out.type = SquareType.tl;
+
+      expect(out.LetterMultiplier).toEqual(3);
+
+    })
+    it('implicit letter multiplier', () => {
+
+      out = new Square();
+
+      expect(out.LetterMultiplier).toEqual(1);
+
+    })
+
+    it('explicit  word multiplier', () => {
+
+      out = new Square();
+      out.type = SquareType.dw;
+
+      expect(out.WordMultiplier).toEqual(2);
+
+    })
+
+    it('implicit word multiplier', () => {
+
+      out = new Square();
+
+      expect(out.WordMultiplier).toEqual(1);
 
     })
 
   })
+
 })

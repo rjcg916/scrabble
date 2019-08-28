@@ -5,44 +5,47 @@ export enum SquareType {
 };
 
 export class Square {
-  public tile: Tile;
-  private type: SquareType = SquareType.reg;
-  private isFinal: boolean = false;
+  private _type: SquareType = SquareType.reg;
+  private _isFinal: boolean = false;
 
-  constructor(tile : Tile = null)
+  constructor(private _tile : Tile = null)
   {
-    this.tile = tile;
+    this._tile = _tile;
   }
 
-  public Place(tile: Tile) {
-    this.tile = tile;
+  set tile(_tile: Tile)  {
+    this._tile = _tile;
   }
 
-  public isOccupied() {
-    return this.tile !== null;
+  get tile() : Tile {
+    return this._tile;
   }
 
-  public getTile() {
-    return this.tile;
+  set type(type : SquareType) {
+    this._type = type;
   }
 
-  public SetType(type : SquareType) {
-    this.type = type;
+  get type() : SquareType {
+    return this._type;
   }
 
-  public getLetterMultiplier() : number {
-    if (this.type == SquareType.tl)
+  isOccupied() : boolean {
+    return this._tile !== null;
+  }
+
+  get LetterMultiplier() : number {
+    if (this._type == SquareType.tl)
        return 3;
-    else if (this.type == SquareType.dl)
+    else if (this._type == SquareType.dl)
        return 2;
     else
        return 1;
   }
 
-  public getWordMultiplier() : number {
-    if (this.type == SquareType.tw)
+  get WordMultiplier() : number {
+    if (this._type == SquareType.tw)
        return 3;
-    else if (this.type == SquareType.dw)
+    else if (this._type == SquareType.dw)
        return 2;
     else
        return 1;

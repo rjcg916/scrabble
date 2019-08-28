@@ -1,14 +1,15 @@
 
 export class Tile {
 
-  constructor(private letter: string, private value: number = 1) {
-    this.letter = letter.toUpperCase();
+  constructor(private _letter: string, private _value: number = 1) {
+    this._letter = _letter.toUpperCase();
   }
 
-  public getLetter(): string {
-    return this.letter;
+  get letter(): string {
+    return this._letter;
   }
-  public getValue(): number {
-    return this.value;
+
+  get value(): number {
+    return this._value;
   }
 }

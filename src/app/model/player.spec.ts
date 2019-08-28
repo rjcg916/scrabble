@@ -10,13 +10,14 @@ describe('Player', () => {
 
   describe('create', () => {
 
-    it('with name ', () => {
+    it('with explicit name', () => {
 
       out = new Player("name");
 
       expect(out.name).toContain("name");
 
     })
+
 
     it('returns remaining tiles', () => {
 

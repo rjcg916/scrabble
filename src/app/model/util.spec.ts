@@ -57,7 +57,7 @@ describe(' word & tile', () => {
     tiles[1] = new Tile("O", 1);
     tiles[2] = new Tile("B", 1);
     let newTiles = Util.LettersToTiles("BOB");
-    expect(tiles[0].getLetter()).toEqual(newTiles[0].getLetter());
+    expect(tiles[0].letter).toEqual(newTiles[0].letter);
   })
 
   it(' b o b as string', () => {

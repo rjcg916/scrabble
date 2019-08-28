@@ -5,14 +5,14 @@ export interface ILexicon {
 export class Lexicon implements ILexicon {
 
 
-  private words = new Array<string>();
+  private _words = new Array<string>();
 
   constructor() {
-    this.words.push("bob");
-    this.words.push("dianne");
+    this._words.push("bob");
+    this._words.push("dianne");
   }
 
    public isWordValid( word : string) : boolean {
-     return this.words.indexOf(word) > -1;
+     return this._words.indexOf(word) > -1;
   }
 }

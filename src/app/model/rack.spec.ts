@@ -10,18 +10,18 @@ describe('Rack', () => {
 
   describe('create', () => {
 
-    it('and leave empty', () => {
+    it('initially empty', () => {
 
       out = new Rack();
 
-      expect(out.getTileCount()).toBe(0);
+      expect(out.TileCount).toBe(0);
 
     })
 
-    it('and completely fill', () => {
+    it('fill to capacity', () => {
 
       out = new Rack();
-      out.FillWithTiles(
+      out.AddTiles(
         [new Tile("A"),
         new Tile("B"),
         new Tile("A"),
@@ -33,14 +33,14 @@ describe('Rack', () => {
         new Tile("B")
         ])
 
-      expect(out.getTileCount()).toEqual(Rack.capacity);
+      expect(out.TileCount).toEqual(Rack.capacity);
 
     })
 
-    it('2 tiles left in TileBag', () => {
+    it('unused tiles still available', () => {
 
       out = new Rack();
-      let remaining = out.FillWithTiles(
+      let remaining = out.AddTiles(
         [new Tile("A"),
         new Tile("B"),
         new Tile("A"),
@@ -55,24 +55,24 @@ describe('Rack', () => {
       expect(remaining.length).toEqual(2);
 
     })
-    it('and partially fill', () => {
+    it('partially filled with all available tiles', () => {
 
       out = new Rack();
-      out.FillWithTiles(
+      out.AddTiles(
         [new Tile("A"),
         new Tile("B"),
         new Tile("A"),
         new Tile("B"),
         ])
 
-      expect(out.getTileCount()).toEqual(4);
+      expect(out.TileCount).toEqual(4);
 
     })
 
-    it('no tiles left in tile bag', () => {
+    it('all tiles consumed', () => {
 
       out = new Rack();
-      let remaining = out.FillWithTiles(
+      let remaining = out.AddTiles(
         [new Tile("A"),
         new Tile("B"),
         new Tile("A"),
@@ -87,13 +87,13 @@ describe('Rack', () => {
   })
 
 
-  describe('create ', () => {
+  describe('add and remove tiles ', () => {
 
 
-    it('and remove one', () => {
+    it('remove one', () => {
 
       out = new Rack();
-      out.FillWithTiles(
+      out.AddTiles(
         [new Tile("A"),
         new Tile("B"),
         new Tile("C"),
@@ -103,19 +103,19 @@ describe('Rack', () => {
         new Tile("G")
         ])
 
-      expect(out.getTileCount()).toEqual(7);
+      expect(out.TileCount).toEqual(7);
 
       out.RemoveTiles([new Tile("A")]);
 
-      expect(out.getTileCount()).toEqual(6);
+      expect(out.TileCount).toEqual(6);
 
 
     })
 
-    it('and remove one with dup letters', () => {
+    it('remove one with dup letters', () => {
 
       out = new Rack();
-      out.FillWithTiles(
+      out.AddTiles(
         [new Tile("A"),
         new Tile("B"),
         new Tile("C"),
@@ -125,19 +125,19 @@ describe('Rack', () => {
         new Tile("A")
         ])
 
-      expect(out.getTileCount()).toEqual(7);
+      expect(out.TileCount).toEqual(7);
 
       out.RemoveTiles([new Tile("A")]);
 
-      expect(out.getTileCount()).toEqual(6);
+      expect(out.TileCount).toEqual(6);
 
 
     })
 
-    it('and remove two ', () => {
+    it('remove two ', () => {
 
       out = new Rack();
-      out.FillWithTiles(
+      out.AddTiles(
         [new Tile("A"),
         new Tile("B"),
         new Tile("C"),
@@ -147,19 +147,19 @@ describe('Rack', () => {
         new Tile("A")
         ])
 
-      expect(out.getTileCount()).toEqual(7);
+      expect(out.TileCount).toEqual(7);
 
       out.RemoveTiles([new Tile("A"), new Tile("B")]);
 
-      expect(out.getTileCount()).toEqual(5);
+      expect(out.TileCount).toEqual(5);
 
 
     })
 
-    it('and remove two dups ', () => {
+    it('remove two dups ', () => {
 
       out = new Rack();
-      out.FillWithTiles(
+      out.AddTiles(
         [new Tile("A"),
         new Tile("B"),
         new Tile("C"),
@@ -169,24 +169,24 @@ describe('Rack', () => {
         new Tile("A")
         ])
 
-      expect(out.getTileCount()).toEqual(7);
+      expect(out.TileCount).toEqual(7);
 
       out.RemoveTiles([new Tile("A"), new Tile("A")]);
 
-      expect(out.getTileCount()).toEqual(5);
+      expect(out.TileCount).toEqual(5);
 
 
     })
 
   })
 
-  describe('create ', () => {
+  describe('specific tiles', () => {
 
 
-    it('and test for tiles just added', () => {
+    it('test for tiles just added', () => {
 
       out = new Rack();
-      out.FillWithTiles(
+      out.AddTiles(
         [new Tile("A"),
         new Tile("B"),
         new Tile("C"),
@@ -196,7 +196,7 @@ describe('Rack', () => {
         new Tile("G")
         ])
 
-      expect(out.getTileCount()).toEqual(7);
+      expect(out.TileCount).toEqual(7);
 
       let found = out.allTilesInRack(
         [new Tile("A"),
@@ -212,10 +212,10 @@ describe('Rack', () => {
 
     })
 
-    it('and test for non-existent ', () => {
+    it('test for non-existent ', () => {
 
       out = new Rack();
-      out.FillWithTiles(
+      out.AddTiles(
         [new Tile("A"),
         new Tile("B"),
         new Tile("C"),
@@ -225,7 +225,7 @@ describe('Rack', () => {
         new Tile("G")
         ])
 
-      expect(out.getTileCount()).toEqual(7);
+      expect(out.TileCount).toEqual(7);
 
       let found = out.allTilesInRack(
         [new Tile("A"),
@@ -241,10 +241,10 @@ describe('Rack', () => {
 
     })
 
-    it('and test for non-existent dup ', () => {
+    it('test for non-existent dup ', () => {
 
       out = new Rack();
-      out.FillWithTiles(
+      out.AddTiles(
         [new Tile("A"),
         new Tile("B"),
         new Tile("C"),
@@ -254,7 +254,7 @@ describe('Rack', () => {
         new Tile("G")
         ])
 
-      expect(out.getTileCount()).toEqual(7);
+      expect(out.TileCount).toEqual(7);
 
       let found = out.allTilesInRack(
         [new Tile("A"),

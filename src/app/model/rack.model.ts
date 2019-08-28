@@ -1,48 +1,47 @@
 import { Tile } from "./tile.model";
-import { all } from "q";
 
 export class Rack {
-  private rack: Tile[];
+  private _rack: Tile[];
   public static capacity: number = 7;
+
   constructor() {
-    this.rack = new Array<Tile>();
+    this._rack = new Array<Tile>();
   }
 
 
-
-  public FillWithTiles(tileSource: Array<Tile>): Array<Tile> {
-    let tilesNeeded = Rack.capacity - this.rack.length;
-    let tilesAvailable = tileSource.length;
+  AddTiles(tiles: Array<Tile>): Array<Tile> {
+    let tilesNeeded = Rack.capacity - this._rack.length;
+    let tilesAvailable = tiles.length;
 
     let drawCount = tilesAvailable > tilesNeeded ? tilesNeeded : tilesAvailable;
-    let tilesToAdd = tileSource.splice(0, drawCount);
+    let tilesToAdd = tiles.splice(0, drawCount);
 
-    this.rack = this.rack.concat(tilesToAdd);
+    this._rack = this._rack.concat(tilesToAdd);
 
-    return tileSource;
+    return tiles;
   }
 
-  public RemoveTiles(tilesToRemove: Array<Tile>) {
-    tilesToRemove.forEach(t => {
-      let i = this.rack.findIndex(r => r.getLetter() == t.getLetter());
+  RemoveTiles(tiles: Array<Tile>) {
+    tiles.forEach(t => {
+      let i = this._rack.findIndex(r => r.letter == t.letter);
       if (i > -1)
-        this.rack.splice(i, 1);
+        this._rack.splice(i, 1);
     })
   }
 
-  public allTilesInRack?(tiles: Array<Tile>): boolean {
+  allTilesInRack?(tiles: Array<Tile>): boolean {
 
     // need to create copy to handle duplicate letters
     let copyOfRack = new Array<Tile>();
-    for (let i in this.rack) {
-      copyOfRack[i] = new Tile(this.rack[i].getLetter())
+    for (let i in this._rack) {
+      copyOfRack[i] = new Tile(this._rack[i].letter);
     }
 
     // make sure each tile letter found in rack
     let allLettersFound = true;
 
     tiles.forEach(t => {
-      let i = copyOfRack.findIndex(r => r.getLetter() == t.getLetter());
+      let i = copyOfRack.findIndex(r => r.letter == t.letter);
       if (i < 0) {// letter not found
         allLettersFound = false;
        return false;
@@ -54,7 +53,11 @@ export class Rack {
     return allLettersFound;
   }
 
-  public getTileCount(): number {
-    return this.rack.length;
+  get TileCount(): number {
+    return this._rack.length;
+  }
+
+  get Tiles(): Array<Tile> {
+      return this._rack;
   }
 }

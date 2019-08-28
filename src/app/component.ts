@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Board} from './model/board.model';
+import {Board} from './model/boardv1.model';
 
 @Component({
   selector: "app",

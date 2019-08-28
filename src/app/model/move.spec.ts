@@ -1,4 +1,4 @@
-import { Board } from './board.model';
+import { Board } from './boardv1.model';
 import { placement, Move, VerticalMove, HorizontalMove } from './move.model';
 import { coord, row, col } from './coord.model';
 import { Tile } from './tile.model';
