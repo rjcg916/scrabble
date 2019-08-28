@@ -3,7 +3,9 @@
 <table class="table table-sm table-bordered mt-1 text-dark">
  <tr *ngFor="let row of rows;">
    <td  *ngFor="let col of row.cols;"
-         (click)="selectedCell=col" >
-        {{col.rowIndex}},{{col.colIndex}}</td>
-</tr>
+         (click)="selectedCell=col"  ><div [class]="GetBackgroundClasses(col.square.type)">
+          {{col.rowIndex}},{{col.colIndex}}
+         </div>
+       </td>
+ </tr>
 </table>

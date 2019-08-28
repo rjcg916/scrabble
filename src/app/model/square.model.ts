@@ -1,4 +1,5 @@
 import { Tile } from './tile.model';
+import { detectWTF } from '@angular/core/src/profile/wtf_impl';
 
 export enum SquareType {
   reg, dl, tl, dw, tw, start

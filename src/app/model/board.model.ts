@@ -5,8 +5,12 @@ import { Lexicon } from './lexicon.model';
 import { Move, placement } from './move.model';
 
 export class Col {
-  public square: Square;
+  private _square: Square;
   constructor(public rowIndex, public colIndex) {
+    this._square = new Square();
+  }
+  get square() {
+    return this._square;
   }
 }
 
@@ -15,7 +19,7 @@ export class Row {
 
   constructor(public rowIndex: number) {
     this._cols = [];
-    for (let c = 0; c < 15; c++) {
+    for (let c = col._A; c <= col._O; c++) {
       this._cols.push(new Col(this.rowIndex, c));
     }
   }
@@ -29,7 +33,7 @@ export class Board {
   private _rows: Array<Row> = [];
   constructor() {
 
-    for (let r = 0; r < 15; r++) {
+    for (let r = row._1; r <= row._15; r++) {
       this._rows.push(new Row(r))
     }
 
@@ -81,8 +85,8 @@ export class Board {
     // start
     this._rows[row._8].cols[col._H].square.type = SquareType.start;
 
-    // double letters
-    this.SetSquareValues(SquareType.dl,
+    // triple letters
+    this.SetSquareValues(SquareType.tl,
       [
         new coord(row._1, col._D),
         new coord(row._1, col._L),
@@ -110,8 +114,8 @@ export class Board {
         new coord(row._15, col._L)
       ]);
 
-    // triple letters
-    this.SetSquareValues(SquareType.tl, [
+    // double letters
+    this.SetSquareValues(SquareType.dl, [
 
       new coord(row._2, col._F),
       new coord(row._2, col._J),
