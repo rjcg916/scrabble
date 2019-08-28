@@ -21,7 +21,7 @@ describe('Board', () => {
   });
 
 
-/*   describe('add tiles', () => {
+   describe('add tiles', () => {
 
     it('count should be 1', () => {
 
@@ -164,6 +164,6 @@ describe('Board', () => {
     })
 
 
-  }) */
+  }) 
 
 })
