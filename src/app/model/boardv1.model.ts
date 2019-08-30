@@ -101,7 +101,7 @@ export class Board {
       for (let c: col = start.col; c <= end.col; c++) {
         // todo: handle missing tile
         let square = this.board[r][c];
-        if (square.isOccupied())
+        if (square.isOccupied)
           aString = aString.concat(square.tile.letter);
         else
           return "";
@@ -112,11 +112,14 @@ export class Board {
 
   }
 
+
+
   candidateWords(theMove: Move): Array<string> {
     // generate a list of words created by move
 
     return new Array<string>();
   }
+
 
   allValidWords(words: Array<string>): boolean {
     let lexicon = new Lexicon();
@@ -133,13 +136,14 @@ export class Board {
 
     for (let r: row = start.row; r <= end.row; r++) {
       for (let c: col = start.col; c <= end.col; c++) {
-        if (this.board[r][c].isOccupied())
+        if (this.board[r][c].isOccupied)
           return false;
       }
     }
 
     return true;
   }
+
 
   getPlacmentValue(start: coord, end: coord): number {
 
@@ -167,6 +171,7 @@ export class Board {
     return letterValue * wordMultiplier
   }
 
+  
   getPlacementType(tiles: Array<Tile>, start: coord, end: coord): placement {
 
     let horizontal: boolean = start.row === end.row;
@@ -223,7 +228,7 @@ export class Board {
 
     for (let r: row = row._1; r <= row._15; r++) {
       for (let c: col = col._A; c <= col._O; c++) {
-        count = this.board[r][c].isOccupied() ? count + 1 : count;
+        count = this.board[r][c].isOccupied ? count + 1 : count;
       }
     }
 

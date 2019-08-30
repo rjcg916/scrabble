@@ -30,7 +30,7 @@ export class Square {
     return this._type;
   }
 
-  isOccupied() : boolean {
+  get isOccupied() : boolean {
     return this._tile !== null;
   }
 
