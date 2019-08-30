@@ -1,9 +1,9 @@
 import { Rack } from './rack.model';
 import { Tile } from './tile.model';
-import { Board } from './boardv1.model';
+import { Board } from './board.model';
 import { Move, placement, HorizontalMove, VerticalMove } from './move.model';
 import { coord } from './coord.model';
-import { Util } from './util';
+import { Util } from './util.model';
 
 
 interface MoveResult {

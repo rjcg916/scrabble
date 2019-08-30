@@ -1,6 +1,6 @@
-import { Util } from './util';
+import { Util } from './util.model';
 import { coord, Span } from './coord.model';
-import { Board } from './boardv1.model';
+import { Board } from './board.model';
 
 export enum placement {
   horizontal, vertical, invalid

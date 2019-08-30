@@ -1,4 +1,4 @@
-import { Board } from './boardv1.model';
+import { Board } from './board.model';
 import { coord, row, col } from './coord.model';
 import { Player } from './player.model';
 import { Lexicon } from './lexicon.model';

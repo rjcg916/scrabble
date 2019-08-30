@@ -23,7 +23,7 @@ describe('Board', () => {
 
    describe('add tiles', () => {
 
-    it('count should be 1', () => {
+    it('single tile count', () => {
 
       out = new Board();
       tile = new Tile("A", 1);
@@ -34,7 +34,7 @@ describe('Board', () => {
 
     })
 
-    it('count should be 3', () => {
+    it('multiple tile count', () => {
 
       out = new Board();
       tile = new Tile("A", 1);
@@ -45,18 +45,9 @@ describe('Board', () => {
 
     })
 
-    it('horizontal placment', () => {
 
-      out = new Board();
-      tile = new Tile("A", 1);
 
-      let placementType: placement = out.getPlacementType([tile, tile, tile], new coord(row._8, col._H), new coord(row._8, col._J));
-
-      expect(placementType).toEqual(placement.horizontal);
-
-    })
-
-    it('place horizontal', () => {
+    it('place tiles horizontally', () => {
 
       out = new Board();
       tile = new Tile("A", 1);
@@ -65,19 +56,9 @@ describe('Board', () => {
       expect(index).toEqual(col._I)
     })
 
-    it('vertical placment', () => {
 
-      out = new Board();
-      tile = new Tile("A", 1);
-      let start = new coord(row._8, col._H);
-      let end = new coord(row._10, col._H);
-      let placementType: placement = out.getPlacementType([tile, tile, tile], start, end);
 
-      expect(placementType).toEqual(placement.vertical);
-
-    })
-
-    it('place vertical', () => {
+    it('place tiles vertically', () => {
 
       out = new Board();
       tile = new Tile("A", 1);
@@ -86,7 +67,7 @@ describe('Board', () => {
       expect(index).toEqual(row._9)
     })
 
-    it('placement value of 3', () => {
+    it('check placement value', () => {
 
       out = new Board();
       tile = new Tile("A", 1);
@@ -164,6 +145,6 @@ describe('Board', () => {
     })
 
 
-  }) 
+  })
 
 })

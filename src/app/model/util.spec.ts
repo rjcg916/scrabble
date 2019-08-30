@@ -1,7 +1,8 @@
 import { Tile } from './tile.model';
-import { Util } from './util';
+import { Util } from './util.model';
 import { Square } from './square.model';
-import { SquareCount} from './coord.model'
+import { SquareCount, coord, row, col} from './coord.model'
+import { placement} from './move.model';
 
 describe('run ', () => {
 
@@ -68,5 +69,25 @@ describe(' word & tile', () => {
     expect(Util.TilesToLetters(tiles)).toEqual("BOB");
   })
 
+  it('horizontal placment', () => {
 
+   // out = new Board();
+   let tile = new Tile("A", 1);
+
+    let placementType: placement = Util.getPlacementType([tile, tile, tile], new coord(row._8, col._H), new coord(row._8, col._J));
+
+    expect(placementType).toEqual(placement.horizontal);
+
+  })
+
+  it('vertical placment', () => {
+
+    let tile = new Tile("A", 1);
+    let start = new coord(row._8, col._H);
+    let end = new coord(row._10, col._H);
+    let placementType: placement = Util.getPlacementType([tile, tile, tile], start, end);
+
+    expect(placementType).toEqual(placement.vertical);
+
+  })
 });

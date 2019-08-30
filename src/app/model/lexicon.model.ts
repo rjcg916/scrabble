@@ -12,7 +12,17 @@ export class Lexicon implements ILexicon {
     this._words.push("dianne");
   }
 
-   public isWordValid( word : string) : boolean {
+  isWordValid( word : string) : boolean {
      return this._words.indexOf(word) > -1;
   }
+
+  allValidWords(words: Array<string>): boolean {
+    // for each candidate, check
+    words.forEach(w => {
+      if (!this.isWordValid(w))
+        return false;
+    })
+    return true;
+  }
+
 }

@@ -1,8 +1,7 @@
 import { Square, SquareType } from './square.model';
 import { SquareCount, row, col, coord, Span } from './coord.model';
 import { Tile } from './tile.model';
-import { Lexicon } from './lexicon.model';
-import { Move, placement } from './move.model';
+import { Move} from './move.model';
 
 export class Col {
   private _square: Square;
@@ -30,6 +29,11 @@ export class Row {
 }
 
 export class Board {
+  static lastRow = row._15;
+  static lastCol = col._O;
+  static rowCount = row._1 - row._15 + 1;
+  static colCount = col._A - col._O + 1;
+
   private _rows: Array<Row> = [];
   constructor() {
 
@@ -47,26 +51,14 @@ export class Board {
     return this._rows;
   }
 
-  get rowCount(): number {
-    return this._rows.length;
-  }
-
-  get lastRow(): row {
-    return row._15;
-  }
 
   getCols(row: number) {
     this._rows[row].cols;
   }
 
-  get colCount(): number {
-    return this._rows[0].cols.length;
-  }
 
-  get lastCol(): col {
-    return col._O;
-  }
-
+  // true if all the squares within the specified
+  // are vacant
   squaresVacant?(start: coord, end: coord): boolean {
 
     for (let r: row = start.row; r <= end.row; r++) {
@@ -90,7 +82,6 @@ export class Board {
   }
 
   // return all the squares in a specified column
-
   getVerticalSlice(col: col): Array<Square> {
     let slice = new Array<Square>(SquareCount);
 
@@ -101,6 +92,7 @@ export class Board {
   }
 
   // ToDo ? stringify a square
+  // generate a potential word from a range of squares
   getWordFromSquares(start: coord, end: coord): string {
 
     let aString: string = "";
@@ -120,23 +112,16 @@ export class Board {
 
   }
 
+      // generate a list of words created by move
   candidateWords(theMove: Move): Array<string> {
-    // generate a list of words created by move
 
     return new Array<string>();
   }
 
-  // another class
-  allValidWords(words: Array<string>): boolean {
-    let lexicon = new Lexicon();
-    // for each candidate, check
-    words.forEach(w => {
-      if (!lexicon.isWordValid(w))
-        return false;
-    })
-    return true;
-  }
 
+
+  // compute the value of a potential move defined by
+  // the specified range
   getPlacmentValue(start: coord, end: coord): number {
 
     let letterValue: number = 0;
@@ -163,27 +148,7 @@ export class Board {
     return letterValue * wordMultiplier
   }
 
-  getPlacementType(tiles: Array<Tile>, start: coord, end: coord): placement {
 
-    let horizontal: boolean = start.row === end.row;
-    let horizontalNumberOfTiles: number = end.col - start.col + 1;
-    let vertical: boolean = start.col === end.col;
-    let verticalNumberOfTiles: number = end.row - start.row + 1;
-    let oneTile: boolean = horizontal && vertical;
-    let numberOfTiles: number = tiles.length;
-
-    if (horizontal && vertical && (!oneTile))
-      return placement.invalid
-    else {
-      if (horizontal && (horizontalNumberOfTiles === numberOfTiles))
-        return placement.horizontal
-      else if (vertical && (verticalNumberOfTiles === numberOfTiles))
-        return placement.vertical
-      else
-        return placement.invalid
-    }
-
-  }
 
   PlaceTilesVertical(start: coord, tiles: Array<Tile>): row {
 
