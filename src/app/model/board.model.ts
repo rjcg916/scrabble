@@ -5,8 +5,15 @@ import { Move} from './move.model';
 
 export class Col {
   private _square: Square;
-  constructor(public rowIndex, public colIndex) {
+  constructor(private _row : row, private _col : col) {
     this._square = new Square();
+  }
+  get r() : string {
+    return  row[this._row].substr(1);
+  }
+
+  get c() : string {
+    return col[this._col].substr(1);
   }
   get square() {
     return this._square;
@@ -16,13 +23,16 @@ export class Col {
 export class Row {
   private _cols: Array<Col>;
 
-  constructor(public rowIndex: number) {
+  constructor(private _rowIndex: number) {
     this._cols = [];
     for (let c = col._A; c <= col._O; c++) {
-      this._cols.push(new Col(this.rowIndex, c));
+      this._cols.push(new Col(this._rowIndex, c));
     }
   }
 
+  get r() : number {
+    return this._rowIndex;
+  }
   get cols(): Array<Col> {
     return this._cols;
   }

@@ -3,7 +3,7 @@ import { placement} from './move.model';
 export const SquareCount = 15;
 
 export enum row {
-  _1, _2, _3, _4, _5, _6, _7, _8,
+  _1 , _2, _3, _4, _5, _6, _7, _8,
   _9, _10, _11, _12, _13, _14, _15
 }
 export enum col {

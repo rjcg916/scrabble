@@ -17,7 +17,7 @@ export class BoardComponent {
     this._board = new Board();
   }
 
-  GetBackground( squareType : SquareType) : string {
+  GetBackgroundStyle( squareType : SquareType) : string {
     if (squareType == null)
       squareType = SquareType.reg;
     switch (squareType) {
