@@ -1,18 +1,18 @@
 .bg-start {
-  background-color: purple;
+  background-color: black;
 }
 .bg-square {
-  background-color: gray;
+  background-color: white;
 }
 .bg-tl {
-  background-color:green;
-}
-.bg-tw {
-  background-color: orange;
-}
-.bg-dl {
   background-color: blue;
 }
+.bg-tw {
+  background-color: red;
+}
+.bg-dl {
+  background-color: lightskyblue;
+}
 .bg-dw {
-  background-color: orangered;
+  background-color: pink;
 }

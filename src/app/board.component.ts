@@ -24,7 +24,7 @@ export class BoardComponent {
       case SquareType.start:
         return "bg-start";
       case SquareType.dl:
-        return "bg-dw";
+        return "bg-dl";
         break;
       case SquareType.tl:
         return "bg-tl";

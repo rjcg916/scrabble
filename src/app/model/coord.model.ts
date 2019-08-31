@@ -1,4 +1,3 @@
-import { networkInterfaces } from "os";
 import { placement} from './move.model';
 
 export const SquareCount = 15;
