@@ -1,7 +1,8 @@
 import { Component } from '@angular/core'
-import { Board, Row} from './model/board.model';
-import { coord } from './model/coord.model';
-import {Square, SquareType} from './model/square.model';
+import { Board, Row, Col} from './model/board.model';
+import { coord, row, col } from './model/coord.model';
+import { Tile} from './model/tile.model';
+import { Square, SquareType} from './model/square.model';
 
 @Component({
   selector: "board",
@@ -15,8 +16,20 @@ export class BoardComponent {
   selectedCell : coord;
   constructor() {
     this._board = new Board();
+
+    let newTile = new Array<Tile>();
+    newTile.push(new Tile("B", 1));
+    this._board.PlaceTilesHorizontal(new coord( row._1, col._A ), newTile);
   }
 
+
+  GetContents(theSquare : Square) : string {
+    if (theSquare.tile){
+      return theSquare.tile.letter;
+    } else {
+      return "_";
+    }
+  }
   GetBackgroundStyle( squareType : SquareType) : string {
     if (squareType == null)
       squareType = SquareType.reg;

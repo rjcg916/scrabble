@@ -9,11 +9,11 @@ export class Col {
     this._square = new Square();
   }
   get r() : string {
-    return  row[this._row].substr(1);
+    return  row[this._row].substr(1); //use name of enum after _
   }
 
   get c() : string {
-    return col[this._col].substr(1);
+    return col[this._col].substr(1); // use name of enum after _
   }
   get square() {
     return this._square;
@@ -30,9 +30,10 @@ export class Row {
     }
   }
 
-  get r() : number {
-    return this._rowIndex;
+  get r() : string {
+    return row[this._rowIndex].substr(1);// use name of enum after _
   }
+
   get cols(): Array<Col> {
     return this._cols;
   }
@@ -66,6 +67,33 @@ export class Board {
     this._rows[row].cols;
   }
 
+  PlaceTilesVertical(start: coord, tiles: Array<Tile>): row {
+
+    let currentRow: number = start.row;
+    let maxRow: number = row._15;
+    let currentTile = 0;
+
+    do {
+      this._rows[currentRow++].cols[start.col].square.tile = tiles[currentTile++];
+    } while ((currentRow <= maxRow) && (currentTile < tiles.length))
+
+    return currentRow - 1;
+  }
+
+
+  PlaceTilesHorizontal(start: coord, tiles: Array<Tile>): col {
+
+    let currentCol: number = start.col;
+    let maxCol: number = col._O;
+    let currentTile = 0;
+
+    do {
+      this._rows[start.row].cols[currentCol++].square.tile = tiles[currentTile++];
+    } while ((currentCol <= maxCol) && (currentTile < tiles.length))
+
+    return currentCol - 1;
+
+  }
 
   // true if all the squares within the specified
   // are vacant
@@ -160,33 +188,7 @@ export class Board {
 
 
 
-  PlaceTilesVertical(start: coord, tiles: Array<Tile>): row {
 
-    let currentRow: number = start.row;
-    let maxRow: number = row._15;
-    let currentTile = 0;
-
-    do {
-      this._rows[currentRow++].cols[start.col].square.tile = tiles[currentTile++];
-    } while ((currentRow <= maxRow) && (currentTile < tiles.length))
-
-    return currentRow - 1;
-  }
-
-
-  PlaceTilesHorizontal(start: coord, tiles: Array<Tile>): col {
-
-    let currentCol: number = start.col;
-    let maxCol: number = col._O;
-    let currentTile = 0;
-
-    do {
-      this._rows[start.row].cols[currentCol++].square.tile = tiles[currentTile++];
-    } while ((currentCol <= maxCol) && (currentTile < tiles.length))
-
-    return currentCol - 1;
-
-  }
 
 
   getOccupiedCount(): number {

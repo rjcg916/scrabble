@@ -1,11 +1,23 @@
 <div>This is the board component</div>
 <div>Selected Square {{selectedCell.r.toString()}},{{selectedCell.c.toString()}}</div>
 <table class="table table-sm table-bordered mt-1 text-dark">
- <tr *ngFor="let row of rows;">
-   <td  *ngFor="let col of row.cols;"
-         (click)="selectedCell=col"  ><div [class]="GetBackgroundStyle(col.square.type)">
-          {{col.r}},{{col.c}}
-         </div>
-       </td>
- </tr>
+
+  <tr>
+    <th>_</th>
+    <th *ngFor="let col of rows[0].cols;">{{col.c}}</th>
+  </tr>
+  <tr *ngFor="let row of rows;">
+    <th> {{row.r}}</th>
+    <td *ngFor="let col of row.cols;" (click)="selectedCell=col">
+      <div [class]="GetBackgroundStyle(col.square.type)">
+        {{ GetContents(col.square)}}
+      </div>
+    </td>
+    <th> {{row.r}}</th>
+  </tr>
+  <tr>
+    <th>_</th>
+    <th *ngFor="let col of rows[0].cols;">{{col.c}}</th>
+  </tr>
+
 </table>

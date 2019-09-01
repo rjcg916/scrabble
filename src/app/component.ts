@@ -6,7 +6,7 @@ import {Board} from './model/board.model';
   templateUrl : 'template.html'
 })
 export class GameComponent {
- // board : Board = new Board();
+
 }
 
 

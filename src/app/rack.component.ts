@@ -15,7 +15,10 @@ export class RackComponent {
     this.capacity = Rack.capacity;
   }
 
+
+
   public getTiles() : Array<Tile> {
-    return [ new Tile("A", 1), new Tile("B", 1), new Tile("Z", 10)];
+ //   return [ new Tile("A", 1), new Tile("B", 1), new Tile("Z", 10)];
+   return this.rack.Tiles;
   }
 }

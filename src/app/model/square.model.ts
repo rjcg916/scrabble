@@ -51,4 +51,6 @@ export class Square {
     else
        return 1;
   }
+
+
 }
