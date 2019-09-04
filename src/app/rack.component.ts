@@ -4,7 +4,8 @@ import {Tile} from './model/tile.model';
 
 @Component({
   selector: "rack",
-  templateUrl : "rack.component.html"
+  templateUrl : "rack.component.html",
+  styleUrls : ["rack.component.css"]
 })
 export class RackComponent {
   rack : Rack;
@@ -17,4 +18,16 @@ export class RackComponent {
   public getSlots() : Array<Slot> {
    return this.rack.Slots;
   }
+
+  public GetBackgroundStyle( slot : Slot) : string {
+    if (slot.tile == null)
+      return "bg-slot"
+    switch (slot.tile) {
+      default:
+        return "bg-tile";
+        break;
+    }
+
+  }
+
 }

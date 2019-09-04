@@ -4,7 +4,7 @@
   <tr>
   <td  *ngFor="let slot of getSlots();"
           (click)="selectedTile=slot.tile" >
-          <div style="background:white">{{slot.ShowSlot()}} </div>
+          <div [class]="GetBackgroundStyle(slot)">{{slot.ShowSlot()}} </div>
         </td>
  </tr>
  </table>
