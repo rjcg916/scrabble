@@ -2,8 +2,9 @@
 <div>Current selection </div>
 <table class="table table-sm table-bordered mt-1 text-dark">
   <tr>
-  <td  *ngFor="let tile of getTiles();" [square-attr]
-          (click)="selectedTile=tile" >
-         {{tile.letter}} {{tile.value}}</td>
+  <td  *ngFor="let slot of getSlots();"
+          (click)="selectedTile=slot.tile" >
+          <div style="background:white">{{slot.ShowSlot()}} </div>
+        </td>
  </tr>
  </table>

@@ -1,18 +1,22 @@
 import { Tile } from "./tile.model";
 
 export class Slot {
-
-  private _tile;
-
+  private _tile : Tile;
   constructor() {
     this._tile = null;
   }
-
   set tile(tile: Tile) {
     this._tile = tile;
   }
   get tile(): Tile {
     return this._tile;
+  }
+
+  ShowSlot() : string {
+    if (this._tile) {
+      return this._tile.letter;
+    }
+    return "_";
   }
 }
 
@@ -20,7 +24,6 @@ export class Rack {
   private _rack: Slot[] = [];
   private _tileCount: number = 0;
   public static capacity: number = 7;
-
   constructor() {
     for (let i = 0; i < Rack.capacity; i++) {
       this._rack.push(new Slot());
@@ -83,7 +86,7 @@ export class Rack {
     return this._tileCount;
   }
 
-  get Tiles(): Array<Slot> {
+  get Slots(): Array<Slot> {
     return this._rack;
   }
 }

@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Rack} from './model/rack.model';
+import {Rack, Slot} from './model/rack.model';
 import {Tile} from './model/tile.model';
 
 @Component({
@@ -9,16 +9,12 @@ import {Tile} from './model/tile.model';
 export class RackComponent {
   rack : Rack;
   selectedTile : Tile;
-  public capacity : number;
   constructor() {
     this.rack = new Rack();
-    this.capacity = Rack.capacity;
+    this.rack.AddTiles([new Tile("A", 1), new Tile("B", 1), new Tile("Z", 10)]);
   }
 
-
-
-  public getTiles() : Array<Tile> {
- //   return [ new Tile("A", 1), new Tile("B", 1), new Tile("Z", 10)];
-   return this.rack.Tiles;
+  public getSlots() : Array<Slot> {
+   return this.rack.Slots;
   }
 }
