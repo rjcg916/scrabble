@@ -36,55 +36,55 @@ describe('Rack', () => {
       expect(out.TileCount).toEqual(Rack.capacity);
 
     })
+  });
+  it('unused tiles still available', () => {
 
-    it('unused tiles still available', () => {
+    out = new Rack();
+    let remaining = out.AddTiles(
+      [new Tile("A"),
+      new Tile("B"),
+      new Tile("A"),
+      new Tile("B"),
+      new Tile("A"),
+      new Tile("B"),
+      new Tile("B"),
+      new Tile("A"),
+      new Tile("B")
+      ]);
 
-      out = new Rack();
-      let remaining = out.AddTiles(
-        [new Tile("A"),
-        new Tile("B"),
-        new Tile("A"),
-        new Tile("B"),
-        new Tile("A"),
-        new Tile("B"),
-        new Tile("B"),
-        new Tile("A"),
-        new Tile("B")
-        ]);
-
-      expect(remaining.length).toEqual(2);
-
-    })
-    it('partially filled with all available tiles', () => {
-
-      out = new Rack();
-      out.AddTiles(
-        [new Tile("A"),
-        new Tile("B"),
-        new Tile("A"),
-        new Tile("B"),
-        ])
-
-      expect(out.TileCount).toEqual(4);
-
-    })
-
-    it('all tiles consumed', () => {
-
-      out = new Rack();
-      let remaining = out.AddTiles(
-        [new Tile("A"),
-        new Tile("B"),
-        new Tile("A"),
-        new Tile("B"),
-        ])
-
-      expect(remaining.length).toEqual(0);
-
-    })
-
+    expect(remaining.length).toEqual(2);
 
   })
+
+  it('partially filled with all available tiles', () => {
+
+    out = new Rack();
+    out.AddTiles(
+      [new Tile("A"),
+      new Tile("B"),
+      new Tile("A"),
+      new Tile("B"),
+      ])
+
+    expect(out.TileCount).toEqual(4);
+
+  })
+
+  it('all tiles consumed', () => {
+
+    out = new Rack();
+    let remaining = out.AddTiles(
+      [new Tile("A"),
+      new Tile("B"),
+      new Tile("A"),
+      new Tile("B"),
+      ])
+
+    expect(remaining.length).toEqual(0);
+
+  })
+
+
 
 
   describe('add and remove tiles ', () => {
@@ -174,7 +174,6 @@ describe('Rack', () => {
       out.RemoveTiles([new Tile("A"), new Tile("A")]);
 
       expect(out.TileCount).toEqual(5);
-
 
     })
 
