@@ -2,8 +2,11 @@ import { Tile } from './tile.model';
 import { Endpoints, coord, Span, SquareCount, row, col } from './coord.model';
 import { Square  } from './square.model';
 import { Board } from './board.model';
-import { placement} from './move.model';
+//import { placement} from './move.model';
 
+export enum placement {
+  horizontal, vertical, invalid
+}
 export class Util {
   public static LettersToTiles(letters: String): Tile[] {
 

@@ -2,9 +2,7 @@ import { Util } from './util.model';
 import { coord, Span } from './coord.model';
 import { Board } from './board.model';
 
-export enum placement {
-  horizontal, vertical, invalid
-}
+
 
 interface IMove {
   findParallelRun(): Span

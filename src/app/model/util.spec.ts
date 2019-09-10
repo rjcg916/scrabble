@@ -2,7 +2,7 @@ import { Tile } from './tile.model';
 import { Util } from './util.model';
 import { Square } from './square.model';
 import { SquareCount, coord, row, col} from './coord.model'
-import { placement} from './move.model';
+import { placement} from './util.model';
 
 describe('run ', () => {
 

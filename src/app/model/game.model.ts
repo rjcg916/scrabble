@@ -4,15 +4,15 @@ import { Player } from './player.model';
 import { Lexicon } from './lexicon.model';
 import { Tile } from './tile.model';
 import { TileBagService } from '../service/tile-bag.service';
-import { placement } from './move.model';
+import { placement } from './util.model';
 
 export class Game {
 
   // game has board/squares, players/racks, lexicon, tilebag
-  private board: Board;
-  private players: Player[];
+  public board: Board;
+  public players: Player[] = [];
   private lexicon: Lexicon;
-  private tileBag: Tile[] = new Array<Tile>();
+  private tileBag: Tile[];
   private numberOfPlayers: number;
   private tileBagService = new TileBagService();
   private activePlayer: number = 0;
@@ -24,20 +24,24 @@ export class Game {
 
     // for each player, draw tiles from bag and put in rack
     this.numberOfPlayers = playerCount;
-    this.players = new Array<Player>(playerCount);
-    for (let i: number = 0; i < playerCount; i++) {
-      let p = this.players[i];
-      p = new Player();
-      this.tileBag = p.DrawTiles(this.tileBag);
+
+    for (let i = 0; i < playerCount; i++) {
+      this.players.push(new Player());
+      this.tileBag = this.players[i].DrawTiles(this.tileBag);
     }
+
 
     // create board
     this.board = new Board();
 
     // initialize/choose lexicon
-    this.lexicon = new Lexicon();
+//    this.lexicon = new Lexicon();
   }
 
+
+ // get board() : Board {
+ //   return this._board;
+ // }
 
 
   getName(): string {
@@ -70,5 +74,3 @@ export class Game {
     }
 
   }
-
-

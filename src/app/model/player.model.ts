@@ -1,9 +1,9 @@
 import { Rack } from './rack.model';
 import { Tile } from './tile.model';
 import { Board } from './board.model';
-import { Move, placement, HorizontalMove, VerticalMove } from './move.model';
+import { Move, HorizontalMove, VerticalMove } from './move.model';
 import { coord } from './coord.model';
-import { Util } from './util.model';
+import { Util, placement } from './util.model';
 
 
 interface MoveResult {
@@ -20,6 +20,10 @@ export class Player {
 
   get name() {
     return this._name;
+  }
+
+  get rack() {
+    return this._rack;
   }
 
   DrawTiles(tiles: Array<Tile>): Array<Tile> {

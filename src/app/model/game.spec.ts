@@ -36,6 +36,18 @@ describe('Game', () => {
 
     })
 
+    it('get second  player rack', () => {
+      out = new Game(2);
+      expect(out.players[1].rack.slots.length).toEqual(7);
+    })
+
+  })
+
+  describe('board is created', () => {
+    it('access board', () => {
+      out = new Game(2);
+      expect(out.board.rows.length).toEqual(15);
+    })
   })
 
 })

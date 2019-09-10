@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
 //import { AppComponent } from './app.component';
-import {GameComponent} from './component';
+import {GameComponent} from './game.component';
 import {BoardComponent} from './board.component';
 import {PlayerComponent} from './player.component'
 import {RackComponent} from './rack.component';

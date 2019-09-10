@@ -1,3 +1,4 @@
+import { Injectable } from '@angular/core';
 import { Tile } from '../model/tile.model';
 
 class Letter {
@@ -5,7 +6,7 @@ class Letter {
   }
 }
 
-
+@Injectable()
 export class TileBagService {
 
   private static letters : Array<Letter> =
@@ -39,7 +40,7 @@ export class TileBagService {
     new Letter("", 0, 2)
   ]
 
-  public GetTiles(): Array<Tile> {
+  GetTiles(): Array<Tile> {
 
     let tiles: Array<Tile> = new Array<Tile>();
 

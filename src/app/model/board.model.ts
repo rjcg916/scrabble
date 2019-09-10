@@ -1,7 +1,7 @@
 import { Square, SquareType } from './square.model';
 import { SquareCount, row, col, coord, Span } from './coord.model';
 import { Tile } from './tile.model';
-import { Move} from './move.model';
+import { Move } from './move.model';
 
 export class Col {
   private _square: Square;

@@ -1,5 +1,5 @@
 import { Board } from './board.model';
-import { placement} from './move.model';
+import { placement} from './util.model';
 import { coord, row, col } from './coord.model';
 import { Tile } from './tile.model';
 

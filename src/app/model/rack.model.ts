@@ -86,7 +86,7 @@ export class Rack {
     return this._tileCount;
   }
 
-  get Slots(): Array<Slot> {
+  get slots(): Array<Slot> {
     return this._rack;
   }
 }

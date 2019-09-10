@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Rack, Slot} from './model/rack.model';
 import {Tile} from './model/tile.model';
 
@@ -8,15 +8,18 @@ import {Tile} from './model/tile.model';
   styleUrls : ["rack.component.css"]
 })
 export class RackComponent {
-  rack : Rack;
+
+  @Input("rack")
+  _rack : Rack;
+  //_rack : Rack;
   selectedTile : Tile;
   constructor() {
-    this.rack = new Rack();
-    this.rack.AddTiles([new Tile("A", 1), new Tile("B", 1), new Tile("Z", 10)]);
+    //this._rack = new Rack();
+   // this._rack.AddTiles([new Tile("A", 1), new Tile("B", 1), new Tile("Z", 10)]);
   }
 
   public getSlots() : Array<Slot> {
-   return this.rack.Slots;
+   return this._rack.slots;
   }
 
   public GetBackgroundStyle( slot : Slot) : string {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { Board, Row, Col} from './model/board.model';
 import { coord, row, col } from './model/coord.model';
 import { Tile} from './model/tile.model';
@@ -12,14 +12,16 @@ import { Square, SquareType} from './model/square.model';
 
 export class BoardComponent {
 
-  private _board : Board;
+  @Input("board")
+  _board : Board;
+//  private _board : Board;
   selectedCell : coord;
   constructor() {
-    this._board = new Board();
+//    this._board = new Board();
 
-    let newTile = new Array<Tile>();
-    newTile.push(new Tile("B", 1));
-    this._board.PlaceTilesHorizontal(new coord( row._1, col._A ), newTile);
+  //  let newTile = new Array<Tile>();
+  //  newTile.push(new Tile("B", 1));
+  //  this._board.PlaceTilesHorizontal(new coord( row._1, col._A ), newTile);
   }
 
 

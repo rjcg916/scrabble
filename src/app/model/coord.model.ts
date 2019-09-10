@@ -1,4 +1,4 @@
-import { placement} from './move.model';
+//import { placement} from './move.model';
 
 export const SquareCount = 15;
 
