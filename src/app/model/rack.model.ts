@@ -25,6 +25,7 @@ export class Rack {
   private _tileCount: number = 0;
   public static capacity: number = 7;
   constructor() {
+    this._rack = new Array<Slot>();
     for (let i = 0; i < Rack.capacity; i++) {
       this._rack.push(new Slot());
     }
@@ -86,7 +87,10 @@ export class Rack {
     return this._tileCount;
   }
 
-  get slots(): Array<Slot> {
+  GetSlots(): Slot[] {
     return this._rack;
   }
+// get Slots() : Slot[] {
+//   return this._rack;
+// }
 }

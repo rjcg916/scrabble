@@ -7,10 +7,11 @@ import {Rack} from './model/rack.model';
   templateUrl : "player.component.html"
 })
 export class PlayerComponent {
+
   @Input("player")
   _player : Player;
 
-  get rack() : Rack {
+  GetRack() : Rack {
     return this._player.rack;
   }
 }

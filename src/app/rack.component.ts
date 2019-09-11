@@ -9,20 +9,13 @@ import {Tile} from './model/tile.model';
 })
 export class RackComponent {
 
-  @Input("rack")
-  _rack : Rack;
-  //_rack : Rack;
   selectedTile : Tile;
-  constructor() {
-    //this._rack = new Rack();
-   // this._rack.AddTiles([new Tile("A", 1), new Tile("B", 1), new Tile("Z", 10)]);
+
+  GetSlots() : Slot[] {
+   return this.rack.GetSlots();
   }
 
-  public getSlots() : Array<Slot> {
-   return this._rack.slots;
-  }
-
-  public GetBackgroundStyle( slot : Slot) : string {
+  GetBackgroundStyle( slot : Slot) : string {
     if (slot.tile == null)
       return "bg-slot"
     switch (slot.tile) {
@@ -32,5 +25,8 @@ export class RackComponent {
     }
 
   }
+
+  @Input("rack")
+  rack : Rack;
 
 }

@@ -38,7 +38,7 @@ describe('Game', () => {
 
     it('get second  player rack', () => {
       out = new Game(2);
-      expect(out.players[1].rack.slots.length).toEqual(7);
+      expect(out.players[1].rack.GetSlots().length).toEqual(7);
     })
 
   })

@@ -20,9 +20,9 @@ describe('Rack', () => {
 
     it('check slots', () => {
       out = new Rack();
-      expect(out.slots.length).toEqual(7);
+      expect(out.GetSlots().length).toEqual(7);
     })
-    
+
     it('fill to capacity', () => {
 
       out = new Rack();

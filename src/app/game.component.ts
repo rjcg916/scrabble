@@ -16,7 +16,7 @@ export class GameComponent {
    return this.game.board;
   }
 
-  getPlayer(p : number) {
+  GetPlayer(p : number) {
     return this.game.players[p - 1];
   }
 }

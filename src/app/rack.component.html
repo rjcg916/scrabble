@@ -2,7 +2,7 @@
 <div>Current selection </div>
 <table class="table table-sm table-bordered mt-1 text-dark">
   <tr>
-  <td  *ngFor="let slot of getSlots();"
+  <td  *ngFor="let slot of GetSlots();"
           (click)="selectedTile=slot.tile" >
           <div [class]="GetBackgroundStyle(slot)">{{slot.ShowSlot()}} </div>
         </td>
