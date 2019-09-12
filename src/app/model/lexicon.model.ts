@@ -1,3 +1,6 @@
+import { RestLexicon}  from '../service/rest.lexicon';
+import { Observable} from 'rxjs';
+
 export interface ILexicon {
   isWordValid(word: string) : boolean;
 }
@@ -25,4 +28,14 @@ export class Lexicon implements ILexicon {
     return true;
   }
 
+}
+
+export class WebLexicon implements ILexicon  {
+
+  constructor( private restLexicon : RestLexicon) {
+  }
+
+  isWordValid( word : string ) : boolean {
+    return this.restLexicon.isWordValid(word);
+  }
 }
