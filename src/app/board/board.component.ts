@@ -1,8 +1,7 @@
 import { Component, Input } from '@angular/core'
-import { Board, Row, Col} from './model/board.model';
-import { coord, row, col } from './model/coord.model';
-import { Tile} from './model/tile.model';
-import { Square, SquareType} from './model/square.model';
+import { Board, Row} from '../model/board.model';
+import { coord } from '../model/coord.model';
+import { Square, SquareType} from '../model/square.model';
 
 @Component({
   selector: "board",
@@ -75,4 +74,3 @@ export class BoardComponent {
   }
 
 }
-

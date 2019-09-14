@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {Board} from './model/board.model';
-import { Game } from './model/game.model';
+import {Board} from '../model/board.model';
+import { Game } from '../model/game.model';
 
 @Component({
   selector: "app",
@@ -20,6 +20,3 @@ export class GameComponent {
     return this.game.players[p - 1];
   }
 }
-
-
-

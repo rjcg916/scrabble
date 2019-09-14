@@ -26,6 +26,10 @@ export class Player {
     return this._rack;
   }
 
+  getRack() {
+    return this._rack;
+  }
+
   DrawTiles(tiles: Array<Tile>): Array<Tile> {
     return this._rack.AddTiles(tiles);
   }

@@ -1,5 +1,5 @@
 import {TestBed, ComponentFixture, async} from '@angular/core/testing';
-import { Rack, Slot} from './model/rack.model';
+import { Rack, Slot} from '../model/rack.model';
 import { RackComponent } from "./rack.component";
 import {Component, ViewChild, DebugElement} from '@angular/core';
 import {By} from '@angular/platform-browser';
@@ -49,7 +49,7 @@ describe('Rack', () => {
   it('receives the rack through an input property', () => {
 
     fixture.detectChanges();
-    
+
     let slots = mockRack.GetSlots();
     let componentSlots = component.GetSlots();
 

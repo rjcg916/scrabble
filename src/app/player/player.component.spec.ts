@@ -1,9 +1,9 @@
 import { TestBed, ComponentFixture, async } from '@angular/core/testing';
-import { Player } from './model/player.model';
+import { Player } from '../model/player.model';
 import { PlayerComponent } from "./player.component";
 import { Component, ViewChild, DebugElement } from '@angular/core';
 import { By } from '@angular/platform-browser';
-import { Rack } from './model/rack.model';
+import { Rack } from '../model/rack.model';
 
 @Component({
   template: '<player [player]="player"></player>'
@@ -44,7 +44,7 @@ describe('Rack', () => {
     fixture.detectChanges();
     let rack = mockPlayer.rack;
     let componentRack = component.GetRack();
-    expect(rack.length).toEqual(componentRack);
+    expect(rack.length).toEqual(componentRack.GetSlots().length);
   })
 
 

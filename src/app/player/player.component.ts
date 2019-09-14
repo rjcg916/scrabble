@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {Player} from './model/player.model';
-import {Rack} from './model/rack.model';
+import {Player} from '../model/player.model';
+import {Rack} from '../model/rack.model';
 
 @Component({
   selector: "player",
@@ -15,3 +15,4 @@ export class PlayerComponent {
     return this._player.rack;
   }
 }
+

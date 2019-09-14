@@ -6,6 +6,10 @@ class WordFrequency {
   word : string;
   frequency : Object
 }
+ class WordDefinitions {
+  word : string;
+  definitions : object[];
+ }
 
 export const REST_URL = new InjectionToken("rest_url");
 
@@ -14,9 +18,19 @@ export class RestLexicon {
   constructor(private http: HttpClient,
               @Inject(REST_URL) private url : string) {}
 
-  isWordValid(word : string) : boolean {
-    let result : WordFrequency;
-    this.http.get<WordFrequency>('${this.url}/${word}/frequency').subscribe(data => result = data);
-    return result.word == word;
+isWordValid(word : string)  {
+//    let result : WordFrequency;
+return    this.http.get<WordFrequency>('${url}/${word}/frequency');
+//    return result.word == word;
+  }
+
+  getDefinitions(word : string)   {
+  //  let result : WordDefinitions;
+   // this.http.get<WordDefinitions>('${url}/${word}/definitions').subscribe(data => result = data);
+   // return result.definitions;
+    //result = {"word" : "word", "definitions": [{"thing1": "1"}, {"thing2": "2"}]};
+    //return result.definitions;
+     return this.http.get<WordDefinitions>('${url}/${word}/definitions');
+
   }
 }

@@ -1,3 +1,4 @@
+
 import { Directive, ElementRef, Attribute, Input, SimpleChange, EventEmitter, Output } from '@angular/core';
 import { Square } from './model/square.model';
 import {Tile} from './model/tile.model';

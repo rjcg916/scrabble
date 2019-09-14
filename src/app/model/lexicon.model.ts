@@ -36,6 +36,6 @@ export class WebLexicon implements ILexicon  {
   }
 
   isWordValid( word : string ) : boolean {
-    return this.restLexicon.isWordValid(word);
+   return false;
   }
 }

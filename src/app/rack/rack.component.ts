@@ -1,6 +1,6 @@
 import {Component, Input} from '@angular/core';
-import {Rack, Slot} from './model/rack.model';
-import {Tile} from './model/tile.model';
+import {Rack, Slot} from '../model/rack.model';
+import {Tile} from '../model/tile.model';
 
 @Component({
   selector: "rack",
